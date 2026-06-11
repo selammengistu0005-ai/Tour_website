@@ -3748,6 +3748,62 @@ section {
 
   section { padding: var(--sp-2xl) var(--sp-md); }
 
+  /* Destination — swap map for cards */
+  .map-frame        { display: none; }
+  .mobile-dest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-md);
+    margin-top: var(--sp-lg);
+  }
+
+  .mobile-dest-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-sm);
+    background: var(--clr-white);
+    border: 0.06rem solid var(--clr-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-md);
+    cursor: pointer;
+    transition: transform var(--tr-fast), box-shadow var(--tr-fast);
+    box-shadow: var(--shadow-sm);
+  }
+  .mobile-dest-card:hover {
+    transform: translateY(-0.15em);
+    box-shadow: var(--shadow-md);
+  }
+  .mobile-dest-card:active {
+    transform: translateY(0);
+  }
+
+  .mobile-dest-icon {
+    font-size: var(--fs-xl);
+    flex-shrink: 0;
+  }
+
+  .mobile-dest-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .mobile-dest-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--clr-dark);
+    line-height: 1.2;
+  }
+  .mobile-dest-region {
+    font-size: var(--fs-xs);
+    color: var(--clr-terracotta);
+    font-weight: 500;
+  }
+  .mobile-dest-time {
+    font-size: var(--fs-xs);
+    color: var(--clr-muted);
+  }
+
   /* Nav */
   .nav-container { padding: 0.5rem var(--sp-md); }
   .logo-main     { font-size: var(--fs-sm); }
@@ -3856,6 +3912,10 @@ section {
 }
 .pin-label { display: none; }
 
+/* ── MOBILE DESTINATION CARDS ───────────────────────────────── */
+.mobile-dest-grid {
+  display: none;
+}
 
 /* ══════════════════════════════════════════════════════════════
    18. BREAKPOINT — SMALL MOBILE  (≤ 26rem / 416px)
