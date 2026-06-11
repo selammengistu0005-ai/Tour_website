@@ -3749,7 +3749,7 @@ section {
   section { padding: var(--sp-2xl) var(--sp-md); }
 
   /* Destination — swap map for cards */
-  .map-frame        { display: none; }
+  .map-frame { display: block; overflow-x: auto; }
   .mobile-dest-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
