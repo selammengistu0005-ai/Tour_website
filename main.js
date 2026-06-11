@@ -191,232 +191,12 @@ const DESTINATIONS = {
   }
 };
 
-/* ── TIMELINE DATA ─────────────────────────────────────────── */
-const TIMELINES = {
-  lalibela: [
-    { day: 1, title: 'Arrival in Lalibela', location: 'Lalibela Airport', desc: 'Fly into Lalibela and transfer to your hotel. Evening orientation walk through the highland town with your guide.', activities: ['Airport Transfer', 'Town Walk', 'Welcome Dinner'], accommodation: 'Maribela Hotel', meals: 'Dinner', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 2, title: 'Northern Church Cluster', location: 'Lalibela', desc: 'Morning exploration of the Northern Group of churches — Bete Medhane Alem, the largest rock-hewn church in the world, and the iconic Bete Giyorgis.', activities: ['Bete Medhane Alem', 'Bete Maryam', 'Bete Giyorgis'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Lunch', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 3, title: 'Eastern Church Cluster', location: 'Lalibela', desc: 'Explore the Eastern Group and the trench-enclosed Bete Gabriel-Rufael. Afternoon visit to the revered Bete Abba Libanos.', activities: ['Bete Gabriel-Rufael', 'Bete Abba Libanos', 'Lalibela Market'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 4, title: 'Yemrihane Kristos Cave Church', location: 'North of Lalibela', desc: 'Day trip to the 12th-century cave church of Yemrihane Kristos, considered one of Ethiopia\'s finest examples of Aksumite architecture.', activities: ['Yemrihane Kristos Church', 'Village Walk', 'Local Lunch'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Lunch', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 5, title: 'Asheton Maryam Monastery', location: 'Mt. Abuna Yosef', desc: 'Trek up to the clifftop monastery of Asheton Maryam on the slopes of Mount Abuna Yosef for panoramic highland views.', activities: ['Mountain Trek', 'Asheton Maryam Monastery', 'Panoramic Views'], accommodation: 'Maribela Hotel', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 6, title: 'Local Village & Craft Tour', location: 'Lalibela surrounds', desc: 'Visit a traditional Amhara village to meet local artisans — watch weavers, potters, and cross-carvers at work. Traditional coffee ceremony.', activities: ['Village Visit', 'Coffee Ceremony', 'Crafts Workshop'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 7, title: 'Departure Day', location: 'Lalibela Airport', desc: 'Morning at leisure for last visits or souvenir shopping. Transfer to the airport for your onward flight. Farewell Ethiopia!', activities: ['Free Time', 'Last Photos', 'Airport Transfer'], accommodation: 'N/A', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' }
-  ],
-  simien: [
-    { day: 1, title: 'Gondar: Gateway to Simien', location: 'Gondar', desc: 'Fly to Gondar and visit the remarkable Royal Enclosure castles before driving to Debark — gateway town to the Simien Mountains.', activities: ['Gondar Castles', 'Debark Town', 'Trek Briefing'], accommodation: 'Simien Lodge', meals: 'Dinner', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 2, title: 'Trek Begins: Buyit Ras', location: 'Buyit Ras', desc: 'Start the trek at Buyit Ras (3,260m). Encounter your first gelada baboon troops grazing on the escarpment edge with spectacular views.', activities: ['Trekking (12km)', 'Gelada Baboons', 'Escarpment Views'], accommodation: 'Camping', meals: 'All meals', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 3, title: 'Geech Camp', location: 'Geech (3,600m)', desc: 'Trek to Geech camp through stunning highland meadows. Look out for the thick-billed raven and Lammergeyer (bearded vulture) circling overhead.', activities: ['Trekking (14km)', 'Bird Watching', 'Geech Village'], accommodation: 'Camping', meals: 'All meals', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 4, title: 'Imet Gogo Viewpoint', location: 'Imet Gogo (3,926m)', desc: 'Day hike to Imet Gogo — one of the most spectacular viewpoints in Africa, with sheer 1,000m drop cliffs plunging to the lowlands below.', activities: ['Imet Gogo Summit', 'Panoramic Views', 'Rock Hyrax Spotting'], accommodation: 'Camping', meals: 'All meals', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 5, title: 'Chenek Camp & Ethiopian Wolf', location: 'Chenek (3,600m)', desc: 'Trek to Chenek camp, watching for Ethiopian wolves — the rarest canid in Africa. Afternoon search for the elusive Walia ibex on cliff ledges.', activities: ['Trekking (16km)', 'Ethiopian Wolf', 'Walia Ibex'], accommodation: 'Camping', meals: 'All meals', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 6, title: 'Ras Dashen Summit Push', location: 'Ras Dashen (4,550m)', desc: 'Summit day! Climb Ras Dashen — Ethiopia\'s highest peak and the 10th highest in Africa. Incredible views across the roof of the continent.', activities: ['Ras Dashen Summit (4,550m)', 'Achievement Ceremony', 'Descent to Camp'], accommodation: 'Camping', meals: 'All meals', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 7, title: 'Trek Out to Mekane Birhan', location: 'Mekane Birhan', desc: 'Long but rewarding descent through dramatic valleys. Celebration dinner with your trekking crew.', activities: ['Trek Out (18km)', 'Farewell Dinner'], accommodation: 'Guesthouse', meals: 'All meals', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 8, title: 'Return to Gondar', location: 'Gondar', desc: 'Transfer back to Gondar. Afternoon visit to Debre Berhan Selassie Church — its famous ceiling is covered with painted angel faces.', activities: ['Scenic Drive', 'Debre Berhan Selassie', 'Gondar Market'], accommodation: 'Gondar Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 9, title: 'Gondar to Addis', location: 'Addis Ababa', desc: 'Morning flight back to Addis Ababa. Afternoon rest or optional Merkato market visit — Africa\'s largest open-air market.', activities: ['Morning Flight', 'Merkato Market', 'Rest Day'], accommodation: 'Addis Hotel', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 10, title: 'Addis & Departure', location: 'Addis Ababa', desc: 'Final morning in Addis. Visit the National Museum to see Lucy — one of the oldest human ancestors ever discovered — before your departure flight.', activities: ['National Museum', 'Lucy Fossil', 'Departure'], accommodation: 'N/A', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' }
-  ],
-  danakil: [
-    { day: 1, title: 'Fly to Mekelle', location: 'Mekelle', desc: 'Fly to Mekelle, capital of Tigray. Briefing and equipment check for the Danakil expedition. Early dinner and rest — 3am departure ahead.', activities: ['Arrival in Mekelle', 'Expedition Briefing', 'Early Rest'], accommodation: 'Mekelle Hotel', meals: 'Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 2, title: 'Erta Ale Volcano', location: 'Erta Ale (613m)', desc: '4WD drive to the Danakil. Sunset hike to the summit of Erta Ale to witness one of the world\'s only persistent lava lakes glowing at night.', activities: ['4WD Desert Drive', 'Erta Ale Night Hike', 'Active Lava Lake'], accommodation: 'Tented Camp', meals: 'All meals', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 3, title: 'Dallol Crater', location: 'Dallol (−125m)', desc: 'The alien landscape of Dallol — colorful sulfur springs, salt pillars, and acid pools in an otherworldly crater. World record for highest average temperature.', activities: ['Dallol Crater Walk', 'Yellow Lake', 'Salt Flats Photography'], accommodation: 'Desert Camp', meals: 'All meals', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 4, title: 'Karum Salt Lake & Caravan', location: 'Karum Salt Lake', desc: 'Watch Afar salt miners harvesting ancient salt blocks — a trade route unchanged for centuries. Camel caravans carry the salt to highland markets.', activities: ['Salt Miners Visit', 'Camel Caravan', 'Sunset at Salt Flats'], accommodation: 'Desert Camp', meals: 'All meals', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 5, title: 'Return & Departure', location: 'Mekelle → Addis', desc: 'Morning drive back to Mekelle through the Afar lowlands. Afternoon flight to Addis. You\'ve survived the world\'s most extreme landscape!', activities: ['Desert Drive', 'Mekelle Flight', 'Addis Return'], accommodation: 'N/A', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' }
-  ],
-  'historic-north': [
-    { day: 1, title: 'Addis Ababa', location: 'Addis Ababa', desc: 'Arrive in Addis and tour the National Museum, Merkato and Holy Trinity Cathedral. Welcome dinner with traditional injera and tej honey wine.', activities: ['National Museum', 'Merkato Market', 'Welcome Dinner'], accommodation: 'Sheraton Addis', meals: 'Dinner', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 2, title: 'Bahir Dar & Blue Nile Falls', location: 'Bahir Dar', desc: 'Fly to Bahir Dar on Lake Tana. Visit the Blue Nile Falls (Tis Abay) — the "smoking water" — and take a boat to ancient island monasteries.', activities: ['Blue Nile Falls', 'Island Monasteries', 'Lake Tana Boat'], accommodation: 'Kuriftu Resort', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 3, title: 'Gondar Royal Enclosure', location: 'Gondar', desc: 'Drive to Gondar and spend the afternoon at the Fasil Ghebbi Royal Enclosure — six medieval castles built by 17th-century Ethiopian emperors.', activities: ['Fasil Ghebbi Castles', 'Debre Berhan Selassie Church', 'Gondar City Walk'], accommodation: 'Goha Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 4, title: 'Simien Mountains Day Trip', location: 'Simien Mountains', desc: 'Day trip to the Simien Mountains escarpment for panoramic views and gelada baboon encounters. Return to Gondar for the night.', activities: ['Gelada Baboons', 'Escarpment Views', 'Picnic Lunch'], accommodation: 'Goha Hotel', meals: 'Breakfast, Lunch', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 5, title: 'Axum: Ancient Capital', location: 'Axum', desc: 'Fly to Axum — the ancient capital of the Aksumite Empire. Visit the giant stelae field, ancient tombs, and the sacred Church of Our Lady Mary of Zion.', activities: ['Aksumite Stelae', 'Ancient Tombs', 'Church of St. Mary of Zion'], accommodation: 'Yeha Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 6, title: 'Axum Deeper Exploration', location: 'Axum', desc: 'Full day in Axum — explore the Queen of Sheba\'s Palace ruins, the Dongar site, and the fascinating Axum Museum with its remarkable artifacts.', activities: ['Queen of Sheba Palace', 'Dongar Ruins', 'Axum Museum'], accommodation: 'Yeha Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 7, title: 'Fly to Lalibela', location: 'Lalibela', desc: 'Morning flight to Lalibela. Check in and gentle afternoon introduction to the rock-hewn church complex with a sunset viewing.', activities: ['Flight to Lalibela', 'Bete Giyorgis Sunset View', 'Orientation Walk'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 8, title: 'Lalibela Northern Cluster', location: 'Lalibela', desc: 'Full day exploring the Northern Group of rock-hewn churches with your expert guide explaining the extraordinary history and living faith of these sacred sites.', activities: ['Bete Medhane Alem', 'Bete Maryam', 'Bete Giyorgis'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Lunch', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 9, title: 'Lalibela Eastern Cluster', location: 'Lalibela', desc: 'Eastern Group of churches and Bete Abba Libanos. Afternoon village visit and traditional coffee ceremony with a local Lalibela family.', activities: ['Eastern Church Group', 'Village Coffee Ceremony', 'Crafts Market'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Dinner', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 10, title: 'Yemrihane Kristos', location: 'North of Lalibela', desc: 'Day trip to the magnificent cave church of Yemrihane Kristos, set inside a natural cave and considered one of Ethiopia\'s most beautiful and spiritual sites.', activities: ['Yemrihane Kristos Cave Church', 'Mountain Drive', 'Picnic Lunch'], accommodation: 'Maribela Hotel', meals: 'Breakfast, Lunch', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 11, title: 'Return to Addis', location: 'Addis Ababa', desc: 'Morning flight back to Addis Ababa. Afternoon at leisure — optional Merkato shopping or relaxing at the hotel.', activities: ['Morning Flight', 'Addis Afternoon'], accommodation: 'Sheraton Addis', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' },
-    { day: 12, title: 'Addis Free Day', location: 'Addis Ababa', desc: 'Free day in Addis Ababa. Recommended visits: the Ethnological Museum, the vibrant Piazza quarter, or a coffee ceremony tour through Tomoca Café.', activities: ['Ethnological Museum', 'Coffee Tour', 'Piazza Quarter'], accommodation: 'Sheraton Addis', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800' },
-    { day: 13, title: 'Harar Day Trip', location: 'Harar', desc: 'Optional day trip to Harar — fly in the morning to explore the walled old city and attend the famous evening hyena feeding. Return to Addis.', activities: ['Harar Old City', 'Hyena Feeding', 'Islamic Heritage'], accommodation: 'Sheraton Addis', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800' },
-    { day: 14, title: 'Final Day & Departure', location: 'Addis Ababa', desc: 'Final breakfast, last-minute shopping at Shiro Meda crafts market, and transfer to Bole International Airport. Until next time, Ethiopia!', activities: ['Shiro Meda Market', 'Airport Transfer'], accommodation: 'N/A', meals: 'Breakfast', image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=800' }
-  ]
-};
-
-/* ── GALLERY DATA ──────────────────────────────────────────── */
-const GALLERY_ITEMS = [
-  { id: 1, category: 'lalibela', caption: 'Lalibela Classic', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094302/730d2bc9-f739-4bac-8cdd-76c76e095f76.png', featured: true },
-  { id: 2, category: 'simien', caption: 'Simien Mountains Trek', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094329/39fd07c9-8a54-44b0-b0f9-e082e8af8b8a.png', featured: false },
-  { id: 3, category: 'danakil', caption: 'Danakil Adventure', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094396/424f20a3-7f73-4b6e-875e-ab67955a2a5f.png', featured: false },
-  { id: 4, category: 'omo', caption: 'Omo Valley Cultural', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094450/e7eb5639-1d6f-4361-b8b0-a60714783f73.png', featured: false },
-  { id: 5, category: 'wildlife', caption: 'Bale Mountains Wildlife', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094793/583ecc2c-8f90-41b9-b466-56b2d67757e7.png', featured: false },
-  { id: 6, category: 'culture', caption: 'Harar Heritage', image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094835/42f8d671-65b1-49f7-8564-e30aa7924b6c.png', featured: false }
-];
-
-/* ── CHECKLIST DATA ────────────────────────────────────────── */
-const CHECKLISTS = {
-  lalibela: {
-    title: 'Lalibela Packing Checklist',
-    sections: [
-      { icon: '🧳', label: 'Clothing', items: ['Modest clothing for church visits (shoulders/knees covered)', 'Comfortable walking shoes', 'Warm layer for cool highland evenings', 'Light rain jacket (rainy season: Jun–Sep)', 'Sun hat and sunglasses', 'White shawl/scarf (traditional, welcome by locals)'] },
-      { icon: '📋', label: 'Documents & Money', items: ['Valid passport (6+ months validity)', 'Ethiopian tourist visa (get online or on arrival)', 'Travel insurance with medical coverage', 'USD cash for tips and souvenirs', 'Printed hotel/tour confirmations', 'Emergency contact card'] },
-      { icon: '💊', label: 'Health & Safety', items: ['Antimalarial medication (consult your doctor)', 'Yellow fever vaccine certificate', 'Altitude sickness medication (2,630m)', 'Sunscreen SPF 50+', 'Insect repellent', 'Basic first aid kit', 'Hand sanitizer', 'Prescription medications with doctor\'s note'] },
-      { icon: '📸', label: 'Tech & Gear', items: ['Camera with extra batteries', 'Power bank / portable charger', 'Universal power adapter (Type C/F/L)', 'Offline maps downloaded', 'Ethiopian SIM card (buy at airport)', 'Torch/headlamp for church interiors'] }
-    ]
-  },
-  danakil: {
-    title: 'Danakil Depression Checklist',
-    sections: [
-      { icon: '🧳', label: 'Clothing', items: ['Very lightweight breathable shirts (40°C+)', 'Long trousers to protect from sun', 'Sturdy hiking boots for lava fields', 'Wide-brim sun hat — essential!', 'Buff/neck scarf for dust protection', 'Long-sleeved shirt for night (can be cold)', 'Swimwear for hot springs'] },
-      { icon: '💧', label: 'Hydration & Food', items: ['Minimum 4L water per day', 'Electrolyte sachets/tablets', 'High-energy snacks (nuts, dried fruit)', 'Oral rehydration salts', 'Spare food for emergencies'] },
-      { icon: '💊', label: 'Health & Safety', items: ['Antimalarial medication', 'Strong insect repellent (DEET 50%+)', 'Sunscreen SPF 50+', 'Gastro medication', 'Paracetamol/ibuprofen', 'Blister plasters for lava hiking', 'Dust mask or N95 for Dallol gases'] },
-      { icon: '📋', label: 'Documents & Essentials', items: ['Valid passport', 'Ethiopian visa', 'Travel insurance (medical evacuation cover)', 'USD cash only (no card facilities)', 'Emergency numbers saved offline', 'Tour operator contact details'] }
-    ]
-  },
-  simien: {
-    title: 'Simien Mountains Trek Checklist',
-    sections: [
-      { icon: '🥾', label: 'Trekking Gear', items: ['Sturdy hiking boots (broken in)', 'Trekking poles (highly recommended)', 'Daypack (25–30L)', 'Main bag for camp (carried by mules)', 'Gaiters for wet grass', 'Blister plasters and moleskin', 'Sleeping bag rated to −5°C'] },
-      { icon: '🧳', label: 'Clothing (Layering System)', items: ['Moisture-wicking base layers', 'Fleece mid-layer', 'Waterproof/windproof outer shell', 'Warm hat and gloves (4,550m is cold!)', 'Thermal underwear for summit night', 'Gortex rain jacket', 'Sun hat for daytime'] },
-      { icon: '💊', label: 'Health & Safety', items: ['Altitude sickness tablets (Acetazolamide)', 'Sunscreen SPF 50+', 'Lip balm with SPF', 'Blister and wound care', 'Stomach meds for camping food', 'Water purification tablets', 'Emergency whistle'] },
-      { icon: '📸', label: 'Photography', items: ['Camera with weather sealing preferred', '3+ spare batteries (cold drains fast)', 'Lens cleaning kit for dust', 'Extra SD cards', 'Zoom lens for wildlife', 'Tripod for landscape shots'] }
-    ]
-  },
-  omo: {
-    title: 'Omo Valley Cultural Trip Checklist',
-    sections: [
-      { icon: '🧳', label: 'Clothing', items: ['Lightweight breathable shirts', 'Long trousers (respectful in villages)', 'Comfortable walking shoes', 'Sun hat essential (35°C+ lowlands)', 'Light evening jacket', 'Modest swimwear if visiting rivers'] },
-      { icon: '🤝', label: 'Cultural Etiquette', items: ['Gifts for villages: pens, notebooks for children', 'Birr cash for market purchases', 'USD for tour fees/photography permits', 'Phrase guide in local languages (Hamer, Mursi)', 'Ask permission before photographing people', 'Respect traditional ceremonies — listen to your guide'] },
-      { icon: '💊', label: 'Health & Safety', items: ['Strong antimalarial medication', 'DEET 50%+ insect repellent', 'Yellow fever certificate required', 'Sunscreen SPF 50+', 'Stomach and diarrhea medication', 'Water purification tablets', 'Oral rehydration salts'] },
-      { icon: '📋', label: 'Documents & Money', items: ['Ethiopian tourist visa', 'Travel insurance', 'USD + Ethiopian Birr cash (no ATMs)', 'Photography permit (included in tour)', 'Tour operator emergency contact', 'Embassy contact details'] }
-    ]
-  },
-  harar: {
-    title: 'Harar Heritage Trip Checklist',
-    sections: [
-      { icon: '🧳', label: 'Clothing', items: ['Modest clothing (Islamic city — cover shoulders/knees)', 'Comfortable walking shoes for cobblestones', 'Light scarf/shawl for mosque visits', 'Sun hat and sunglasses', 'Casual evening outfit', 'Light jacket for cool Harari evenings'] },
-      { icon: '📋', label: 'Documents & Money', items: ['Valid passport', 'Ethiopian tourist visa', 'Birr cash for market and cafes', 'USD for tips', 'Hyena feeding tip money (recommended)', 'Travel insurance'] },
-      { icon: '💊', label: 'Health', items: ['Standard travel vaccinations', 'Stomach medication', 'Sunscreen', 'Insect repellent', 'Hand sanitizer for market visits'] },
-      { icon: '🎭', label: 'Harar Experiences', items: ['Book hyena feeding night show in advance', 'Try Harari coffee (different from Addis style)', 'Visit Shewa Gate market at sunrise', 'Hire a licensed local Harari guide', 'Budget for basket weaving and incense purchases', 'Try local tej (honey wine) at a tej house'] }
-    ]
-  },
-  bale: {
-    title: 'Bale Mountains Wildlife Checklist',
-    sections: [
-      { icon: '🥾', label: 'Hiking & Wildlife Gear', items: ['Sturdy waterproof hiking boots', 'Binoculars 10×42 minimum for wolf spotting', 'Camera with telephoto lens (200mm+)', 'Trekking poles for high altitude', 'Gaiters for wet highland grass', 'Wildlife checklist for endemic species'] },
-      { icon: '🧳', label: 'Clothing', items: ['Warm layers (Sanetti Plateau is cold)', 'Waterproof rain jacket', 'Fleece mid-layer', 'Base layers for cold mornings', 'Warm hat and gloves', 'Sunscreen for high-altitude UV'] },
-      { icon: '💊', label: 'Health & Safety', items: ['Altitude medication for Sanetti Plateau (4,000m)', 'Sunscreen SPF 50+', 'Insect repellent', 'Water purification tablets', 'First aid kit', 'Anti-blister care'] },
-      { icon: '📋', label: 'Documents', items: ['Passport and Ethiopian visa', 'National park entry permit (included in tour)', 'Travel insurance with evacuation cover', 'Emergency numbers offline', 'Bale Mountains NP rules and ethics guide'] }
-    ]
-  },
-  addis: {
-    title: 'Addis Ababa City Checklist',
-    sections: [
-      { icon: '🧳', label: 'Clothing', items: ['Smart-casual clothing for restaurants', 'Comfortable walking shoes', 'Light jacket for cool Addis evenings (2,355m)', 'Business attire if attending meetings', 'Sun hat and sunglasses', 'Rain jacket for afternoon showers'] },
-      { icon: '📋', label: 'Documents & Money', items: ['Valid passport', 'Ethiopian tourist visa (e-visa recommended)', 'Travel insurance', 'Major credit/debit cards (accepted in hotels)', 'Ethiopian Birr (exchange at airport or hotels)', 'USD as backup'] },
-      { icon: '🎭', label: 'Must-Do Experiences', items: ['National Museum (see Lucy fossil)', 'Merkato — Africa\'s largest market', 'Ethiopian cuisine tasting tour', 'Traditional music and dance at Yod Abyssinia', 'Addis Coffee — best coffee in the world', 'Holy Trinity Cathedral visit'] },
-      { icon: '💊', label: 'Health', items: ['Recommended vaccinations up to date', 'Prescription medications', 'Sunscreen (moderate UV at altitude)', 'Stomach medication (food adjustment period)', 'Hand sanitizer'] }
-    ]
-  }
-};
-
-/* ── SEASONAL DATA ─────────────────────────────────────────── */
-const SEASONAL_DATA = {
-  months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-  monthStatus: ['peak','peak','shoulder','shoulder','off-peak','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-  destinations: [
-    {
-      name: 'Lalibela',
-      status: ['peak','peak','shoulder','shoulder','off-peak','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-      temps: [[10,22],[11,23],[12,24],[12,23],[12,22],[11,20],[10,18],[10,18],[10,20],[10,22],[10,23],[10,22]],
-      notes: ['Perfect dry weather, Timkat festival in Jan','Still ideal, clear views of churches','Pleasant with some showers beginning','Greener landscape, moderate rain','Rains increasing','Heavy rains, muddy paths','Main rainy season','Peak rain, limited access','End of rains, green scenery','Post-rain freshness, great views','Clear skies and cool','Excellent, Christmas celebrations']
-    },
-    {
-      name: 'Simien Mts',
-      status: ['peak','peak','peak','shoulder','shoulder','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-      temps: [[-2,15],[-1,16],[0,17],[2,16],[4,17],[3,15],[2,13],[2,13],[2,15],[0,16],[-1,15],[-2,15]],
-      notes: ['Best trekking weather, crisp views','Excellent visibility, low rainfall','Good trekking, occasional showers','Some rain, still hikeable','Increasing rain, lush scenery','Rainy season begins, slippery trails','Main rains, challenging trekking','Wettest month, not recommended','End of rains, stunning green','Superb trekking conditions','Clear and cold, great views','Perfect with possible frost at summit']
-    },
-    {
-      name: 'Danakil',
-      status: ['peak','peak','shoulder','shoulder','off-peak','off-peak','off-peak','off-peak','shoulder','peak','peak','peak'],
-      temps: [[25,38],[26,40],[28,42],[30,45],[33,48],[35,50],[34,49],[34,48],[33,46],[29,42],[27,40],[25,38]],
-      notes: ['Best time — less extreme heat','Still manageable, clear skies','Warming up, still doable','Getting very hot, caution advised','Extreme heat, not recommended','Dangerously hot (50°C+)','Off limits for most travelers','Off limits — extreme heat','Cooling slightly, adventurous option','Great conditions resuming','Excellent, cool nights on volcano','Peak season, ideal temperatures']
-    },
-    {
-      name: 'Omo Valley',
-      status: ['peak','peak','peak','shoulder','shoulder','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-      temps: [[18,32],[19,34],[20,34],[20,33],[22,35],[21,32],[19,29],[19,29],[19,30],[18,31],[18,32],[18,32]],
-      notes: ['Excellent — dry and colorful markets','Best for Hamer Bull Jumping ceremony','Hot but dry, lush savanna','Occasional showers, still good','Humidity rising, some rain','Rainy, roads may be difficult','Main rains, river crossings risky','Flooding possible, check with guide','End of rains, very green','Perfect weather, post-rain beauty','Ideal, dry and pleasant','Festive season, many ceremonies']
-    },
-    {
-      name: 'Harar',
-      status: ['peak','peak','shoulder','shoulder','off-peak','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-      temps: [[12,26],[13,27],[14,27],[15,27],[17,27],[17,25],[16,23],[16,23],[15,24],[14,25],[13,26],[12,26]],
-      notes: ['Best time, mild and dry','Excellent conditions','Comfortable with light showers','Some afternoon rain','Increasing humidity','Main rainy season','Wettest period','End of heavy rain','Clearing skies, lush surrounds','Perfect conditions','Ideal — cool evenings','Festive with Christmas and Epiphany']
-    },
-    {
-      name: 'Addis Ababa',
-      status: ['peak','peak','shoulder','shoulder','shoulder','rainy','rainy','rainy','shoulder','peak','peak','peak'],
-      temps: [[7,22],[8,23],[10,24],[11,23],[12,24],[12,20],[11,19],[11,19],[11,21],[8,22],[7,22],[7,22]],
-      notes: ['Cool and sunny, ideal city break','Still excellent conditions','Warming up, some afternoon showers','Light rains begin, still pleasant','Occasional heavy showers','Daily rain, bring umbrella','Rainy season peak, indoor activities','Meskel flowers bloom, rainy','Beautiful post-rain green city','Peak season, busy and vibrant','Clear skies, perfect weather','Christmas and Timkat preparations']
-    }
-  ]
-};
-
-/* ── RECOMMENDER QUESTIONS ─────────────────────────────────── */
-const REC_QUESTIONS = [
-  {
-    q: 'What type of traveler are you?',
-    options: [
-      { icon: '🏛️', text: 'History & Culture Lover', value: 'cultural' },
-      { icon: '🦁', text: 'Wildlife Enthusiast', value: 'wildlife' },
-      { icon: '⛰️', text: 'Adventure Trekker', value: 'trekking' },
-      { icon: '📸', text: 'Photographer & Explorer', value: 'all' }
-    ]
-  },
-  {
-    q: 'How much time do you have?',
-    options: [
-      { icon: '⚡', text: '3–5 Days', value: '1-5' },
-      { icon: '📅', text: '6–9 Days', value: '6-9' },
-      { icon: '🗓️', text: '10–14 Days', value: '10-14' },
-      { icon: '🌍', text: '15+ Days', value: '15+' }
-    ]
-  },
-  {
-    q: 'When are you planning to visit?',
-    options: [
-      { icon: '☀️', text: 'Oct – Jan (Dry & Cool)', value: 'dry-cool' },
-      { icon: '🌸', text: 'Feb – Apr (Warm & Clear)', value: 'warm' },
-      { icon: '🌧️', text: 'Jun – Sep (Green Season)', value: 'rainy' },
-      { icon: '🗓️', text: 'I\'m flexible', value: 'flexible' }
-    ]
-  },
-  {
-    q: 'How do you prefer to travel?',
-    options: [
-      { icon: '👫', text: 'Couple / Honeymoon', value: 'couple' },
-      { icon: '👨‍👩‍👧‍👦', text: 'Family Group', value: 'family' },
-      { icon: '🎒', text: 'Solo Adventurer', value: 'solo' },
-      { icon: '👥', text: 'Group of Friends', value: 'group' }
-    ]
-  },
-  {
-    q: 'What landscape draws you most?',
-    options: [
-      { icon: '🏔️', text: 'Mountain Highlands', value: 'mountain' },
-      { icon: '🌋', text: 'Volcanic Wonders', value: 'volcanic' },
-      { icon: '🌿', text: 'Lush Wildlife Parks', value: 'wildlife' },
-      { icon: '🕌', text: 'Ancient Cities & Towns', value: 'ancient' }
-    ]
-  }
-];
-
 /* ── STATE VARIABLES ───────────────────────────────────────── */
 let heroSlideIndex = 0;
 let heroInterval = null;
 let currentLang = 'en';
 let calcState = { base: 0, travelers: 2, hotel: 0, transport: 0 };
 let activeNetworkNode = null;
-let timelineTour = 'lalibela';
-let timelineDay = 0;
 let recStep = 0;
 let recAnswers = {};
 let galleryFilter = 'all';
@@ -785,22 +565,53 @@ function initMap() {
     gondar:        { name: 'Gondar',                 region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=600', desc: 'The "Camelot of Africa" — a walled Royal Enclosure containing six medieval castles built by successive emperors in the 17th century, earning Gondar its nickname as Africa\'s medieval city.', highlights: ['Royal Enclosure', '6 Castles', 'Debre Berhan Church', 'Timkat Festival'], bestTime: 'Oct–Mar', altitude: '2,133m', getting: '~1 hr flight from Addis' }
   };
 
+  /* ── Category labels ── */
+  const CAT_LABELS = {
+    cultural: 'Cultural',
+    nature:   'Nature',
+    wildlife: 'Wildlife',
+    lakes:    'Lakes',
+    volcanic: 'Volcanic'
+  };
+
   /* ── Open popup ── */
   function openPopup(destId) {
     const dest = MAP_DATA[destId];
     if (!dest) return;
 
-    /* Mark active pin */
-    pins.forEach(p => p.classList.remove('active'));
+    /* Mark active pin — dim all others */
+    pins.forEach(p => {
+      p.classList.remove('active');
+      p.classList.add('dimmed');
+    });
     const activePin = document.querySelector(`.map-pin[data-dest="${destId}"]`);
-    if (activePin) activePin.classList.add('active');
+    if (activePin) {
+      activePin.classList.add('active');
+      activePin.classList.remove('dimmed');
+    }
+
+    /* Determine category from pin class */
+    let cat = 'cultural';
+    if (activePin) {
+      if (activePin.classList.contains('pin-wildlife')) cat = 'wildlife';
+      else if (activePin.classList.contains('pin-nature'))   cat = 'nature';
+      else if (activePin.classList.contains('pin-lakes'))    cat = 'lakes';
+      else if (activePin.classList.contains('pin-volcanic')) cat = 'volcanic';
+    }
 
     /* Populate */
-    document.getElementById('mapPopupImg').src         = dest.image;
-    document.getElementById('mapPopupImg').alt         = dest.name;
-    document.getElementById('mapPopupName').textContent    = dest.name;
-    document.getElementById('mapPopupDesc').textContent    = dest.desc;
-    document.getElementById('mapPopupRegion').textContent  = dest.region;
+    document.getElementById('mapPopupImg').src              = dest.image;
+    document.getElementById('mapPopupImg').alt              = dest.name;
+    document.getElementById('mapPopupName').textContent     = dest.name;
+    document.getElementById('mapPopupDesc').textContent     = dest.desc;
+    document.getElementById('mapPopupRegion').textContent   = dest.region;
+
+    /* Category badge */
+    const badgeEl = document.getElementById('mapPopupCatBadge');
+    if (badgeEl) {
+      badgeEl.textContent  = CAT_LABELS[cat] || cat;
+      badgeEl.className    = `map-popup-cat-badge cat-${cat}`;
+    }
 
     document.getElementById('mapPopupHighlights').innerHTML =
       dest.highlights.map(h => `<span class="highlight-tag">${h}</span>`).join('');
@@ -820,10 +631,13 @@ function initMap() {
   function closePopup() {
     popup.classList.remove('visible');
     backdrop.classList.remove('visible');
-    pins.forEach(p => p.classList.remove('active'));
+    pins.forEach(p => {
+      p.classList.remove('active');
+      p.classList.remove('dimmed');
+    });
   }
 
-  /* ── Event listeners ── */
+  /* ── Pin click listeners ── */
   pins.forEach(pin => {
     pin.addEventListener('click', () => openPopup(pin.dataset.dest));
   });
@@ -831,8 +645,43 @@ function initMap() {
   closeBtn.addEventListener('click', closePopup);
   backdrop.addEventListener('click', closePopup);
 
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closePopup();
+  /* ── CTA button in popup ── */
+  const popupCta = document.getElementById('mapPopupCta');
+  if (popupCta) {
+    popupCta.addEventListener('click', () => {
+      closePopup();
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  /* ── View Network expand/collapse ── */
+  const mapFrame       = document.getElementById('mapFrame');
+  const networkOverlay = document.getElementById('mapNetworkOverlay');
+  const viewNetworkBtn = document.getElementById('mapViewNetworkBtn');
+  const mapCloseBtn    = document.getElementById('mapCloseBtn');
+
+  viewNetworkBtn.addEventListener('click', () => {
+    mapFrame.classList.add('expanded');
+    networkOverlay.classList.add('hidden');
+    document.body.style.overflow = 'hidden';
+  });
+
+  mapCloseBtn.addEventListener('click', () => {
+    mapFrame.classList.remove('expanded');
+    networkOverlay.classList.remove('hidden');
+    document.body.style.overflow = '';
+    closePopup();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (mapFrame.classList.contains('expanded')) {
+        mapFrame.classList.remove('expanded');
+        networkOverlay.classList.remove('hidden');
+        document.body.style.overflow = '';
+      }
+      closePopup();
+    }
   });
 
   /* ── Mobile destination cards ── */
@@ -840,91 +689,186 @@ document.addEventListener('keydown', e => {
   mobileCards.forEach(card => {
     card.addEventListener('click', () => openPopup(card.dataset.dest));
   });
-}
 
-/* ================================================================
-   7. TOUR TIMELINE VISUALIZER
-   ================================================================ */
-function initTimeline() {
-  const select = document.getElementById('timelineTourSelect');
-  select.addEventListener('change', () => {
-    timelineTour = select.value;
-    timelineDay  = 0;
-    renderTimeline();
-  });
+  /* ── Map search (top-bar) ── */
+  const mapSearchInput    = document.getElementById('mapSearchInput');
+  const mapSearchDropdown = document.getElementById('mapSearchDropdown');
 
-  document.getElementById('timelinePrev').addEventListener('click', () => {
-    if (timelineDay > 0) { timelineDay--; renderTimeline(); }
-  });
-  document.getElementById('timelineNext').addEventListener('click', () => {
-    const days = TIMELINES[timelineTour] || [];
-    if (timelineDay < days.length - 1) { timelineDay++; renderTimeline(); }
-  });
+  if (mapSearchInput && mapSearchDropdown) {
+    mapSearchInput.addEventListener('input', () => {
+      const q = mapSearchInput.value.toLowerCase().trim();
+      if (!q) { mapSearchDropdown.classList.remove('open'); mapSearchDropdown.innerHTML = ''; return; }
 
-  renderTimeline();
-}
+      const matches = Object.entries(MAP_DATA).filter(([, d]) =>
+        d.name.toLowerCase().includes(q) ||
+        (d.region && d.region.toLowerCase().includes(q)) ||
+        (d.highlights && d.highlights.some(h => h.toLowerCase().includes(q)))
+      ).slice(0, 8);
 
-function renderTimeline() {
-  const days = TIMELINES[timelineTour] || [];
-  if (!days.length) return;
+      if (!matches.length) { mapSearchDropdown.classList.remove('open'); mapSearchDropdown.innerHTML = ''; return; }
 
-  const nav = document.getElementById('timelineNav');
-  nav.innerHTML = days.map((d, i) => `
-    <button class="timeline-day-tab ${i === timelineDay ? 'active' : ''}" data-day="${i}">
-      Day ${d.day}
-    </button>
-  `).join('');
+      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      mapSearchDropdown.innerHTML = matches.map(([id, d]) => `
+        <div class="map-search-item" data-dest="${id}">
+          <span class="map-search-item-name">${d.name.replace(re, '<mark>$1</mark>')}</span>
+          <span class="map-search-item-region">${d.region}</span>
+        </div>
+      `).join('');
+      mapSearchDropdown.classList.add('open');
 
-  nav.querySelectorAll('.timeline-day-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      timelineDay = parseInt(tab.dataset.day);
-      renderTimeline();
+      mapSearchDropdown.querySelectorAll('.map-search-item').forEach(item => {
+        item.addEventListener('mousedown', () => {
+          mapSearchInput.value = '';
+          mapSearchDropdown.classList.remove('open');
+          mapSearchDropdown.innerHTML = '';
+          openPopup(item.dataset.dest);
+          /* Scroll pin into view if possible */
+          const pin = document.querySelector(`.map-pin[data-dest="${item.dataset.dest}"]`);
+          if (pin) pin.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+    });
+
+    mapSearchInput.addEventListener('blur', () => {
+      setTimeout(() => { mapSearchDropdown.classList.remove('open'); mapSearchDropdown.innerHTML = ''; }, 180);
+    });
+
+    /* Wire sidenav search button to focus the map search input */
+    const sidenavSearchBtn = document.getElementById('sidenavSearch');
+    if (sidenavSearchBtn) {
+      sidenavSearchBtn.addEventListener('click', () => {
+        mapSearchInput.focus();
+      });
+    }
+  }
+
+  /* ── Category filter (top-bar) ── */
+  const catBtns = document.querySelectorAll('.map-cat-btn');
+
+  function applyMapCategoryFilter(activeCat) {
+    pins.forEach(pin => {
+      const pinCat = pin.dataset.cat;
+      if (activeCat === 'all' || pinCat === activeCat) {
+        pin.style.display = '';
+        pin.classList.remove('cat-hidden');
+      } else {
+        pin.style.display = 'none';
+        pin.classList.add('cat-hidden');
+      }
+    });
+    /* Close popup if active pin is now hidden */
+    const activePin = document.querySelector('.map-pin.active');
+    if (activePin && activePin.classList.contains('cat-hidden')) closePopup();
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyMapCategoryFilter(btn.dataset.cat);
     });
   });
 
-  const day = days[timelineDay];
-  document.getElementById('timelineDisplay').innerHTML = `
-    <div class="timeline-day-card">
-      <div class="timeline-day-img-wrap">
-        <img class="timeline-day-img" src="${day.image}" alt="${day.title}" loading="lazy" />
-      </div>
-      <div class="timeline-day-info">
-        <span class="timeline-day-badge">📅 Day ${day.day}</span>
-        <h3>${day.title}</h3>
-        <p>${day.desc}</p>
-        <div class="timeline-detail-grid">
-          <div class="timeline-detail-item">
-            <span class="timeline-detail-label">📍 Location</span>
-            <span class="timeline-detail-value">${day.location}</span>
-          </div>
-          <div class="timeline-detail-item">
-            <span class="timeline-detail-label">🏨 Accommodation</span>
-            <span class="timeline-detail-value">${day.accommodation}</span>
-          </div>
-          <div class="timeline-detail-item">
-            <span class="timeline-detail-label">🍽️ Meals</span>
-            <span class="timeline-detail-value">${day.meals}</span>
-          </div>
-          <div class="timeline-detail-item">
-            <span class="timeline-detail-label">🗓️ Day</span>
-            <span class="timeline-detail-value">${day.day} of ${days.length}</span>
-          </div>
-        </div>
-        <div class="timeline-activities">
-          ${day.activities.map(a => `<span class="timeline-activity-tag">✓ ${a}</span>`).join('')}
-        </div>
-      </div>
-    </div>
-  `;
+  /* ── Sidenav button states ── */
+  const sidenavBtns = document.querySelectorAll('.map-sidenav-btn');
+  sidenavBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sidenavBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 
-  document.getElementById('timelineDayCounter').textContent = `Day ${day.day} of ${days.length}`;
-  document.getElementById('timelinePrev').disabled = timelineDay === 0;
-  document.getElementById('timelineNext').disabled = timelineDay === days.length - 1;
+  /* ── Zoom controls ── */
+  const zoomInBtn  = document.getElementById('mapZoomIn');
+  const zoomOutBtn = document.getElementById('mapZoomOut');
+  const zoomResetBtn = document.getElementById('mapZoomReset');
+
+  if (zoomInBtn && zoomOutBtn) {
+    let zoomLevel = 1;
+    const ZOOM_STEP = 0.15;
+    const ZOOM_MIN  = 0.6;
+    const ZOOM_MAX  = 2.2;
+
+    function applyZoom() {
+      const pinsContainer = mapFrame.querySelector('.map-pins') || mapFrame;
+      /* Scale all pins together by adjusting a wrapper if present */
+      const zoomTarget = mapFrame.querySelector('.map-pins-layer') || null;
+      if (zoomTarget) {
+        zoomTarget.style.transform = `scale(${zoomLevel})`;
+        zoomTarget.style.transformOrigin = 'center center';
+      } else {
+        /* Fallback: scale each pin's font-size indicator via CSS var */
+        mapFrame.style.setProperty('--map-zoom', zoomLevel);
+      }
+      if (zoomInBtn)  zoomInBtn.disabled  = zoomLevel >= ZOOM_MAX;
+      if (zoomOutBtn) zoomOutBtn.disabled = zoomLevel <= ZOOM_MIN;
+    }
+
+    zoomInBtn.addEventListener('click', () => {
+      zoomLevel = Math.min(ZOOM_MAX, +(zoomLevel + ZOOM_STEP).toFixed(2));
+      applyZoom();
+    });
+    zoomOutBtn.addEventListener('click', () => {
+      zoomLevel = Math.max(ZOOM_MIN, +(zoomLevel - ZOOM_STEP).toFixed(2));
+      applyZoom();
+    });
+    if (zoomResetBtn) {
+      zoomResetBtn.addEventListener('click', () => { zoomLevel = 1; applyZoom(); });
+    }
+  }
 }
 
 /* ================================================================
    8. AI TRAVEL RECOMMENDER
    ================================================================ */
+const REC_QUESTIONS = [
+  {
+    q: 'What type of experience are you looking for?',
+    options: [
+      { value: 'cultural',  icon: '🏛️', text: 'Historical & Cultural' },
+      { value: 'wildlife',  icon: '🦁', text: 'Wildlife & Safari' },
+      { value: 'trekking',  icon: '🥾', text: 'Trekking & Adventure' },
+      { value: 'all',       icon: '✨', text: 'A Bit of Everything' }
+    ]
+  },
+  {
+    q: 'How long is your ideal trip?',
+    options: [
+      { value: '1-5',   icon: '⚡', text: '1–5 Days (Short Break)' },
+      { value: '6-9',   icon: '🗓️', text: '6–9 Days (One Week)' },
+      { value: '10-14', icon: '🌍', text: '10–14 Days (Two Weeks)' },
+      { value: '15+',   icon: '🏕️', text: '15+ Days (Epic Journey)' }
+    ]
+  },
+  {
+    q: 'What is your budget level?',
+    options: [
+      { value: 'budget',   icon: '💰', text: 'Budget Traveler' },
+      { value: 'mid',      icon: '💳', text: 'Mid-Range Comfort' },
+      { value: 'luxury',   icon: '🥂', text: 'Luxury Experience' },
+      { value: 'flexible', icon: '🎯', text: 'Flexible / Not Sure' }
+    ]
+  },
+  {
+    q: 'Who are you traveling with?',
+    options: [
+      { value: 'solo',   icon: '🧍', text: 'Solo' },
+      { value: 'couple', icon: '👫', text: 'Couple' },
+      { value: 'family', icon: '👨‍👩‍👧', text: 'Family with Kids' },
+      { value: 'group',  icon: '👥', text: 'Group of Friends' }
+    ]
+  },
+  {
+    q: 'What landscape excites you most?',
+    options: [
+      { value: 'mountain',  icon: '🏔️', text: 'Mountains & Highlands' },
+      { value: 'volcanic',  icon: '🌋', text: 'Volcanic & Extreme' },
+      { value: 'wildlife',  icon: '🐘', text: 'Wildlife & Savanna' },
+      { value: 'ancient',   icon: '⛪', text: 'Ancient Cities & Ruins' }
+    ]
+  }
+];
+
 
 function initRecommender() {
   recStep = 0;
@@ -1339,74 +1283,11 @@ function updateLightbox() {
 }
 
 /* ================================================================
-   12. TOUR COMPARISON TOOL
-   ================================================================ */
-function initCompare() {
-  const selects = document.querySelectorAll('.compare-select');
-
-  // Populate selects with tour options
-  selects.forEach(sel => {
-    TOURS.forEach(t => {
-      const opt = document.createElement('option');
-      opt.value = t.id;
-      opt.textContent = `${t.title} (${t.duration} days)`;
-      sel.appendChild(opt);
-    });
-    sel.addEventListener('change', renderCompareTable);
-  });
-
-  renderCompareTable();
-}
-
-function renderCompareTable() {
-  const selects   = document.querySelectorAll('.compare-select');
-  const selected  = [...selects].map(s => s.value).filter(Boolean);
-  const tours     = selected.map(id => TOURS.find(t => t.id === id)).filter(Boolean);
-
-  const tableHead  = document.getElementById('compareTableHead');
-  const tableBody  = document.getElementById('compareTableBody');
-  const emptyEl    = document.getElementById('compareEmpty');
-  const tableWrap  = document.getElementById('compareTableWrap');
-
-  if (tours.length < 2) {
-    emptyEl.style.display = 'block';
-    tableWrap.querySelector('.compare-table').style.display = 'none';
-    return;
-  }
-
-  emptyEl.style.display = 'none';
-  tableWrap.querySelector('.compare-table').style.display = '';
-
-  // Header
-  const headerCells = tours.map(t => `<th>${t.title}</th>`).join('');
-  tableHead.innerHTML = `<th class="compare-feature-col">Feature</th>${headerCells}`;
-
-  // Find max/min for highlighting
-  const minPrice    = Math.min(...tours.map(t => t.price));
-  const maxDuration = Math.max(...tours.map(t => t.duration));
-
-  const rows = [
-    { label: 'Duration', fn: t => `📅 ${t.duration} Days`, highlight: t => t.duration === maxDuration },
-    { label: 'Price (per person)', fn: t => `$${t.price.toLocaleString()}`, highlight: t => t.price === minPrice },
-    { label: 'Activity Type', fn: t => t.activity.charAt(0).toUpperCase() + t.activity.slice(1), highlight: () => false },
-    { label: 'Best For', fn: t => t.badge, highlight: () => false },
-    { label: 'Highlights', fn: t => t.highlights.map(h => `<span class="tag">${h}</span>`).join(' '), highlight: () => false },
-    { label: 'Popularity', fn: t => `${'★'.repeat(Math.round(t.popularity/20))}${'☆'.repeat(5-Math.round(t.popularity/20))} ${t.popularity}%`, highlight: t => t.popularity === Math.max(...tours.map(x => x.popularity)) }
-  ];
-
-  tableBody.innerHTML = rows.map(row => `
-    <tr>
-      <td class="compare-feature-col">${row.label}</td>
-      ${tours.map(t => `<td class="${row.highlight(t) ? 'compare-highlight' : ''}">${row.fn(t)}</td>`).join('')}
-    </tr>
-  `).join('');
-}
-
-/* ================================================================
    13. TRAVEL BUDGET PLANNER (with canvas donut chart)
    ================================================================ */
 function initBudget() {
   const durationSlider = document.getElementById('budgetDuration');
+  if (!durationSlider) return;
   durationSlider.addEventListener('input', () => {
     budgetState.duration = parseInt(durationSlider.value);
     document.getElementById('budgetDurationVal').textContent = budgetState.duration;
@@ -1588,13 +1469,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initTours();
   initCalculator();
   initMap();
-  initTimeline();
-  initRecommender();
-  initSeasonal();
-  initChecklist();
-  initGallery();
-  initCompare();
   initBudget();
+  initRecommender();   // ← ADD THIS
+  initSeasonal();      // ← ADD THIS
+  initChecklist();     // ← ADD THIS
+  initGallery();       // ← ADD THIS
   initContact();
   initScrollReveal();
 });
@@ -1758,7 +1637,7 @@ if (document.getElementById('toursGrid') && !document.getElementById('tourSearch
     }
 
     const searchInput   = document.getElementById('tourSearch');
-    const searchInput   = document.getElementById('tourSearch');
+    
     const suggestBox    = document.getElementById('searchSuggestions');
 
     function showSuggestions(query) {
