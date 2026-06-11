@@ -831,8 +831,14 @@ function initMap() {
   closeBtn.addEventListener('click', closePopup);
   backdrop.addEventListener('click', closePopup);
 
-  document.addEventListener('keydown', e => {
+document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closePopup();
+  });
+
+  /* ── Mobile destination cards ── */
+  const mobileCards = document.querySelectorAll('.mobile-dest-card');
+  mobileCards.forEach(card => {
+    card.addEventListener('click', () => openPopup(card.dataset.dest));
   });
 }
 
