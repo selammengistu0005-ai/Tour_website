@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethiopia Explore Tours — ኢትዮጵያ ኤክስፕሎር ቱርስ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">🦁</span>
+        <div class="logo-text">
+          <span class="logo-main">Ethiopia Explore Tours</span>
+          <span class="logo-sub" lang="am">ኢትዮጵያ ኤክስፕሎር ቱርስ</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#map">Destinations</a></li>
+        <li><a href="#timeline">Itinerary</a></li>
+        <li><a href="#recommender">AI Recommender</a></li>
+        <li><a href="#seasonal">Seasons</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN | አማ</button>
+        <button class="nav-cta" id="bookNow">Book Now</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#map">Destinations</a></li>
+        <li><a href="#timeline">Itinerary</a></li>
+        <li><a href="#recommender">AI Recommender</a></li>
+        <li><a href="#seasonal">Seasons</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero">
+    <div class="hero-bg-slides">
+  <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600')"></div>
+  <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781094302/730d2bc9-f739-4bac-8cdd-76c76e095f76.png')"></div>
+  <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781094329/39fd07c9-8a54-44b0-b0f9-e082e8af8b8a.png')"></div>
+  <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781094329/39fd07c9-8a54-44b0-b0f9-e082e8af8b8a.png')"></div>
+</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Discover the Cradle of Civilization</p>
+      <h1 class="hero-title" data-en="Where Every Journey Tells a Story" data-am="እያንዳንዱ ጉዞ ታሪክ ይናገራል">Where Every Journey Tells a Story</h1>
+      <p class="hero-subtitle" data-en="Explore Ethiopia's ancient wonders, dramatic landscapes, and vibrant cultures with expert local guides." data-am="ከባለሙያ ስሜ መሪዎች ጋር የኢትዮጵያን ጥንታዊ ድንቆች፣ ድራማዊ መልክዓ ምድሮች እና ብሩህ ባህሎች ያስሱ።">Explore Ethiopia's ancient wonders, dramatic landscapes, and vibrant cultures with expert local guides.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">Tour Packages</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Destinations</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">5000+</span>
+          <span class="stat-label">Happy Travelers</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#tours" class="btn-primary">Explore Tours</a>
+        <a href="#recommender" class="btn-secondary hero-btn-secondary">Find My Perfect Trip</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+        <span>Scroll to Explore</span>
+        <div class="scroll-arrow-wrap">
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+    <div class="hero-slide-dots" id="heroSlideDots">
+  <button class="dot active" data-slide="0"></button>
+  <button class="dot" data-slide="1"></button>
+  <button class="dot" data-slide="2"></button>
+  <button class="dot" data-slide="3"></button>
+</div>
+  </section>
+
+  <!-- ===== SECTION 1: INTERACTIVE TOUR PACKAGE EXPLORER ===== -->
+  <section id="tours">
+    <div class="section-header">
+      <span class="section-eyebrow">Explore Our Packages</span>
+      <h2 class="section-title" data-en="Tour Package Explorer" data-am="የጉዞ ፓኬጅ አሳሽ">Tour Package Explorer</h2>
+      <p class="section-subtitle">Filter, search, and discover the perfect Ethiopian adventure for you.</p>
+    </div>
+
+    <!-- Search & Sort Bar -->
+    <div class="tours-toolbar">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="tourSearch" placeholder="Search tours by name or keyword..." aria-label="Search tours" />
+      </div>
+      <div class="sort-bar">
+        <label for="tourSort">Sort by:</label>
+        <select id="tourSort">
+          <option value="popularity">Popularity</option>
+          <option value="duration-asc">Duration: Shortest</option>
+          <option value="duration-desc">Duration: Longest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="tours-filters">
+      <div class="filter-group">
+        <label for="filterDestination">Destination</label>
+        <select id="filterDestination">
+          <option value="all">All Destinations</option>
+          <option value="lalibela">Lalibela</option>
+          <option value="axum">Axum</option>
+          <option value="danakil">Danakil Depression</option>
+          <option value="simien">Simien Mountains</option>
+          <option value="omo">Omo Valley</option>
+          <option value="harar">Harar</option>
+          <option value="bale">Bale Mountains</option>
+          <option value="addis">Addis Ababa</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterDuration">Duration</label>
+        <select id="filterDuration">
+          <option value="all">Any Duration</option>
+          <option value="1-3">1–3 Days</option>
+          <option value="4-7">4–7 Days</option>
+          <option value="8-14">8–14 Days</option>
+          <option value="15+">15+ Days</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterActivity">Activity Type</label>
+        <select id="filterActivity">
+          <option value="all">All Activities</option>
+          <option value="cultural">Historical & Cultural</option>
+          <option value="wildlife">Wildlife & Safari</option>
+          <option value="trekking">Trekking & Adventure</option>
+        </select>
+      </div>
+      <button class="filter-reset" id="filterReset">Reset Filters</button>
+    </div>
+
+    <!-- Tour Cards Grid -->
+    <div class="tours-grid" id="toursGrid">
+      <!-- Cards are injected by JS -->
+    </div>
+    <div class="tours-empty" id="toursEmpty" style="display:none;">
+      <span>😕</span>
+      <p>No tours match your filters. Try adjusting your search.</p>
+    </div>
+  </section>
+
+<!-- ===== SECTION 3: DESTINATION NETWORK EXPLORER ===== -->
+<section id="map">
+  <div class="section-header">
+    <span class="section-eyebrow">Explore the Country</span>
+    <h2 class="section-title" data-en="Destination Network Explorer" data-am="የመዳረሻ አውታረ መረብ አሳሽ">Destination Network Explorer</h2>
+    <p class="section-subtitle">Click any destination to discover tours, highlights, and travel info.</p>
+  </div>
+
+  <div class="network-container">
+    <!-- Canvas for connection lines -->
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- Ethiopia silhouette background -->
+    <div class="network-bg-silhouette"></div>
+
+    <!-- Destination Nodes -->
+    <div class="network-nodes" id="networkNodes">
+
+      <div class="dest-node" data-destination="addis" style="left:50%;top:50%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Addis Ababa" />
+        </div>
+        <span class="node-label">Addis Ababa</span>
+      </div>
+
+      <div class="dest-node" data-destination="lalibela" style="left:50%;top:8%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Lalibela" />
+        </div>
+        <span class="node-label">Lalibela</span>
+      </div>
+
+      <div class="dest-node" data-destination="axum" style="left:73%;top:17%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=120" alt="Axum" />
+        </div>
+        <span class="node-label">Axum</span>
+      </div>
+
+      <div class="dest-node" data-destination="gondar" style="left:82%;top:50%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Gondar" />
+        </div>
+        <span class="node-label">Gondar</span>
+      </div>
+
+      <div class="dest-node" data-destination="simien" style="left:73%;top:83%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=120" alt="Simien Mountains" />
+        </div>
+        <span class="node-label">Simien Mts</span>
+      </div>
+
+      <div class="dest-node" data-destination="harar" style="left:50%;top:92%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Harar" />
+        </div>
+        <span class="node-label">Harar</span>
+      </div>
+
+      <div class="dest-node" data-destination="bale" style="left:27%;top:83%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Bale Mountains" />
+        </div>
+        <span class="node-label">Bale Mts</span>
+      </div>
+
+      <div class="dest-node" data-destination="omo" style="left:27%;top:83%;">
+        <div class="node-ring"></div>
+        <div class="node-inner">
+          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Omo Valley" />
+        </div>
+        <span class="node-label">Omo Valley</span>
+      </div>
+
+    </div>
+
+    <!-- Floating Info Panel -->
+    <div class="network-info-panel" id="networkInfoPanel">
+      <div class="network-info-default" id="networkInfoDefault">
+        <div class="network-info-icon">✦</div>
+        <h3>Select a Destination</h3>
+        <p>Click any node to explore destinations, tours, and travel information.</p>
+      </div>
+      <div class="network-info-detail" id="networkInfoDetail" style="display:none;">
+        <button class="network-info-close" id="networkInfoClose">✕</button>
+        <div class="network-dest-image-wrap">
+          <img id="networkDestImage" src="" alt="" />
+          <div class="network-dest-image-overlay"></div>
+          <div class="network-dest-badges">
+            <span class="network-dest-region" id="networkDestRegion"></span>
+          </div>
+        </div>
+        <div class="network-dest-content">
+          <h3 id="networkDestName"></h3>
+          <p id="networkDestDesc"></p>
+          <div class="network-dest-stats" id="networkDestStats"></div>
+          <div class="network-dest-highlights" id="networkDestHighlights"></div>
+          <a href="#tours" class="btn-primary network-dest-cta">View Tours →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ===== SECTION 4: TOUR TIMELINE VISUALIZER ===== -->
+  <section id="timeline">
+    <div class="section-header">
+      <span class="section-eyebrow">Day by Day</span>
+      <h2 class="section-title" data-en="Tour Timeline Visualizer" data-am="የጉዞ የጊዜ ሰሌዳ ምስላዊ">Tour Timeline Visualizer</h2>
+      <p class="section-subtitle">Navigate through each day of your itinerary in rich detail.</p>
+    </div>
+
+    <div class="timeline-container">
+      <!-- Tour Selector -->
+      <div class="timeline-selector">
+        <label for="timelineTourSelect">Select a Tour:</label>
+        <select id="timelineTourSelect">
+          <option value="lalibela">Lalibela Classic (7 Days)</option>
+          <option value="simien">Simien Mountains Trek (10 Days)</option>
+          <option value="danakil">Danakil Adventure (5 Days)</option>
+          <option value="historic-north">Historic Northern Circuit (14 Days)</option>
+        </select>
+      </div>
+
+      <!-- Timeline Navigation -->
+      <div class="timeline-nav-wrap">
+        <div class="timeline-nav" id="timelineNav">
+          <!-- Day tabs injected by JS -->
+        </div>
+      </div>
+
+      <!-- Timeline Day Display -->
+      <div class="timeline-display" id="timelineDisplay">
+        <!-- Content injected by JS -->
+      </div>
+
+      <!-- Prev / Next Controls -->
+      <div class="timeline-controls">
+        <button class="timeline-btn" id="timelinePrev">← Previous Day</button>
+        <span class="timeline-day-counter" id="timelineDayCounter">Day 1 of 7</span>
+        <button class="timeline-btn" id="timelineNext">Next Day →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: AI-LIKE TRAVEL RECOMMENDER ===== -->
+  <section id="recommender">
+    <div class="section-header">
+      <span class="section-eyebrow">Personalized for You</span>
+      <h2 class="section-title" data-en="AI Travel Recommender" data-am="AI ጉዞ አስቻይ">AI Travel Recommender</h2>
+      <p class="section-subtitle">Answer a few quick questions — we'll find your perfect Ethiopian journey.</p>
+    </div>
+
+    <div class="recommender-container">
+
+  <div class="rec-start-screen" id="recStartScreen">
+    <div class="rec-start-icon">🧭</div>
+    <h3 class="rec-start-title">Find Your Perfect Ethiopian Journey</h3>
+    <p class="rec-start-sub">Answer 5 quick questions and we'll match you with the ideal tour.</p>
+    <button class="rec-start-btn" id="recStartBtn">Start →</button>
+  </div>
+
+  <div class="rec-content-wrap" id="recContentWrap">
+
+    <!-- Progress Bar -->
+    <div class="rec-progress-bar">
+      <div class="rec-progress-fill" id="recProgressFill"></div>
+    </div>
+    <div class="rec-progress-label" id="recProgressLabel">Question 1 of 5</div>
+
+    <!-- Questions -->
+    <div class="rec-question-wrap" id="recQuestionWrap">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Navigation -->
+    <div class="rec-nav">
+      <button class="rec-btn-back" id="recBack" style="display:none;">← Back</button>
+      <button class="rec-btn-next" id="recNext">Next →</button>
+    </div>
+
+    <!-- Results -->
+    <div class="rec-results" id="recResults" style="display:none;">
+      <h3>Your Recommended Tours</h3>
+      <p class="rec-results-sub">Based on your preferences, here are your best matches:</p>
+      <div class="rec-results-grid" id="recResultsGrid"></div>
+      <button class="btn-secondary rec-restart" id="recRestart">Start Over</button>
+    </div>
+
+  </div>
+
+</div>
+  </section>
+
+  <!-- ===== SECTION 6: SEASONAL TRAVEL DASHBOARD ===== -->
+  <section id="seasonal">
+    <div class="section-header">
+      <span class="section-eyebrow">Plan by Season</span>
+      <h2 class="section-title" data-en="Seasonal Travel Dashboard" data-am="የወቅቶች ጉዞ ዳሽቦርድ">Seasonal Travel Dashboard</h2>
+      <p class="section-subtitle">Discover the best time to visit each destination in Ethiopia.</p>
+    </div>
+
+    <div class="seasonal-container">
+      <!-- Month Selector -->
+      <div class="month-selector" id="monthSelector">
+        <button class="month-btn active" data-month="0">Jan</button>
+        <button class="month-btn" data-month="1">Feb</button>
+        <button class="month-btn" data-month="2">Mar</button>
+        <button class="month-btn" data-month="3">Apr</button>
+        <button class="month-btn" data-month="4">May</button>
+        <button class="month-btn" data-month="5">Jun</button>
+        <button class="month-btn" data-month="6">Jul</button>
+        <button class="month-btn" data-month="7">Aug</button>
+        <button class="month-btn" data-month="8">Sep</button>
+        <button class="month-btn" data-month="9">Oct</button>
+        <button class="month-btn" data-month="10">Nov</button>
+        <button class="month-btn" data-month="11">Dec</button>
+      </div>
+
+      <!-- Selected Month Info -->
+      <div class="seasonal-month-header" id="seasonalMonthHeader">
+        <h3 id="seasonalMonthName">January</h3>
+        <span class="seasonal-badge" id="seasonalMonthBadge">Peak Season</span>
+      </div>
+
+      <!-- Destination Weather Cards -->
+      <div class="seasonal-grid" id="seasonalGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Season Legend -->
+      <div class="seasonal-legend">
+        <div class="legend-item"><span class="legend-dot peak"></span> Peak Season</div>
+        <div class="legend-item"><span class="legend-dot shoulder"></span> Shoulder Season</div>
+        <div class="legend-item"><span class="legend-dot off"></span> Off-Peak Season</div>
+        <div class="legend-item"><span class="legend-dot rainy"></span> Rainy Season</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7: BEFORE-YOU-GO CHECKLIST GENERATOR ===== -->
+  <section id="checklist">
+    <div class="section-header">
+      <span class="section-eyebrow">Be Prepared</span>
+      <h2 class="section-title" data-en="Before-You-Go Checklist" data-am="ከመሄድዎ በፊት ዝርዝር">Before-You-Go Checklist</h2>
+      <p class="section-subtitle">Generate a personalized packing and preparation checklist for your destination.</p>
+    </div>
+
+    <div class="checklist-container">
+      <!-- Destination Picker -->
+      <div class="checklist-picker">
+        <div class="picker-field">
+          <label for="checklistDest">Choose your destination:</label>
+          <select id="checklistDest">
+            <option value="">-- Select a destination --</option>
+            <option value="lalibela">Lalibela</option>
+            <option value="danakil">Danakil Depression</option>
+            <option value="simien">Simien Mountains</option>
+            <option value="omo">Omo Valley</option>
+            <option value="harar">Harar</option>
+            <option value="bale">Bale Mountains</option>
+            <option value="addis">Addis Ababa</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="generateChecklist">Generate Checklist</button>
+      </div>
+
+      <!-- Checklist Output -->
+      <div class="checklist-output" id="checklistOutput" style="display:none;">
+        <div class="checklist-title-bar">
+          <h3 id="checklistTitle"></h3>
+          <div class="checklist-actions">
+            <button class="checklist-action-btn" id="checklistPrint">🖨️ Print</button>
+            <button class="checklist-action-btn" id="checklistDownload">⬇️ Download</button>
+          </div>
+        </div>
+
+        <div class="checklist-sections" id="checklistSections">
+          <!-- Injected by JS -->
+        </div>
+
+        <div class="checklist-progress-wrap">
+          <span id="checklistProgressText">0 of 0 items checked</span>
+          <div class="checklist-progress-bar">
+            <div class="checklist-progress-fill" id="checklistProgressFill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 8: INTERACTIVE GALLERY ===== -->
+  <section id="gallery">
+    <div class="section-header">
+      <span class="section-eyebrow">See Ethiopia</span>
+      <h2 class="section-title" data-en="Gallery Experience" data-am="ፎቶ ጋለሪ">Gallery Experience</h2>
+      <p class="section-subtitle">A visual journey through Ethiopia's most breathtaking moments.</p>
+    </div>
+
+    <!-- Gallery Filters -->
+    <div class="gallery-filters">
+      <button class="gallery-filter-btn active" data-filter="all">All</button>
+      <button class="gallery-filter-btn" data-filter="lalibela">Lalibela</button>
+      <button class="gallery-filter-btn" data-filter="simien">Simien Mts</button>
+      <button class="gallery-filter-btn" data-filter="omo">Omo Valley</button>
+      <button class="gallery-filter-btn" data-filter="danakil">Danakil</button>
+      <button class="gallery-filter-btn" data-filter="wildlife">Wildlife</button>
+      <button class="gallery-filter-btn" data-filter="culture">Culture</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Slideshow Toggle -->
+    <div class="gallery-controls">
+      <button class="btn-secondary" id="slideshowToggle">▶ Start Slideshow</button>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" style="display:none;" role="dialog" aria-label="Image viewer">
+      <div class="lightbox-overlay" id="lightboxOverlay"></div>
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <button class="lightbox-prev" id="lightboxPrev">‹</button>
+        <div class="lightbox-img-wrap">
+          <img id="lightboxImg" src="" alt="" />
+          <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+        <button class="lightbox-next" id="lightboxNext">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 9: TOUR COMPARISON TOOL ===== -->
+  <section id="compare">
+    <div class="section-header">
+      <span class="section-eyebrow">Side by Side</span>
+      <h2 class="section-title" data-en="Tour Comparison Tool" data-am="የጉዞ ማነፃፀሪያ">Tour Comparison Tool</h2>
+      <p class="section-subtitle">Compare up to 3 tour packages side by side to find your best match.</p>
+    </div>
+
+    <div class="compare-container">
+      <!-- Selector Row -->
+      <div class="compare-selectors" id="compareSelectors">
+        <div class="compare-select-wrap">
+          <label>Package 1</label>
+          <select class="compare-select" data-slot="0">
+            <option value="">-- Select package --</option>
+          </select>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-select-wrap">
+          <label>Package 2</label>
+          <select class="compare-select" data-slot="1">
+            <option value="">-- Select package --</option>
+          </select>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-select-wrap">
+          <label>Package 3</label>
+          <select class="compare-select" data-slot="2">
+            <option value="">-- Select package --</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="compare-table-wrap" id="compareTableWrap">
+        <table class="compare-table" id="compareTable">
+          <thead>
+            <tr id="compareTableHead">
+              <th class="compare-feature-col">Feature</th>
+              <!-- Package headers injected by JS -->
+            </tr>
+          </thead>
+          <tbody id="compareTableBody">
+            <!-- Rows injected by JS -->
+          </tbody>
+        </table>
+        <div class="compare-empty" id="compareEmpty">
+          <span>🔍</span>
+          <p>Select at least two packages above to compare them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-eyebrow">Get in Touch</span>
+      <h2 class="section-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h2>
+      <p class="section-subtitle">Have questions? Our travel experts are ready to help plan your dream trip.</p>
+    </div>
+
+    <div class="contact-container">
+      <!-- Info Cards -->
+      <div class="contact-info">
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <h4>Visit Us</h4>
+          <p>Bole Road, Addis Ababa<br />Ethiopia</p>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">📞</span>
+          <h4>Call Us</h4>
+          <p>+251 11 234 5678<br />+251 91 234 5678</p>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">✉️</span>
+          <h4>Email Us</h4>
+          <p>info@ethiopiaexploretours.com<br />bookings@ethiopiaexploretours.com</p>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">🕐</span>
+          <h4>Office Hours</h4>
+          <p>Mon–Fri: 8:00 AM – 6:00 PM<br />Sat: 9:00 AM – 3:00 PM</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="contactName">Full Name *</label>
+              <input type="text" id="contactName" placeholder="Your full name" required />
+            </div>
+            <div class="form-field">
+              <label for="contactEmail">Email Address *</label>
+              <input type="email" id="contactEmail" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="contactPhone">Phone Number</label>
+              <input type="tel" id="contactPhone" placeholder="+1 234 567 8900" />
+            </div>
+            <div class="form-field">
+              <label for="contactTour">Tour of Interest</label>
+              <select id="contactTour">
+                <option value="">-- Select a tour --</option>
+                <option>Lalibela Classic (7 days)</option>
+                <option>Simien Mountains Trek (10 days)</option>
+                <option>Danakil Adventure (5 days)</option>
+                <option>Omo Valley Cultural (12 days)</option>
+                <option>Historic Northern Circuit (14 days)</option>
+                <option>Bale Mountains Wildlife (8 days)</option>
+                <option>Harar Heritage (4 days)</option>
+                <option>Complete Ethiopia (21 days)</option>
+                <option>Custom / Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="contactTravelers">Number of Travelers</label>
+            <input type="number" id="contactTravelers" min="1" max="50" placeholder="e.g. 2" />
+          </div>
+          <div class="form-field">
+            <label for="contactMessage">Message *</label>
+            <textarea id="contactMessage" rows="5" placeholder="Tell us your travel dates, questions, or special requests..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary contact-submit">Send Message ✉️</button>
+          <div class="form-success" id="formSuccess" style="display:none;">
+            ✅ Thank you! We'll be in touch within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🦁</span>
+          <div>
+            <span class="footer-logo-main">Ethiopia Explore Tours</span>
+            <span class="footer-logo-sub" lang="am">ኢትዮጵያ ኤክስፕሎር ቱርስ</span>
+          </div>
+        </div>
+        <p class="footer-tagline">Your gateway to the ancient wonders, dramatic landscapes, and vibrant cultures of Ethiopia.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook" class="social-link">📘</a>
+          <a href="#" aria-label="Instagram" class="social-link">📸</a>
+          <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+          <a href="#" aria-label="YouTube" class="social-link">▶️</a>
+          <a href="#" aria-label="TripAdvisor" class="social-link">🦉</a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Tours</h5>
+          <ul>
+            <li><a href="#tours">All Packages</a></li>
+            <li><a href="#tours">Historical & Cultural</a></li>
+            <li><a href="#tours">Wildlife & Safari</a></li>
+            <li><a href="#tours">Trekking & Adventure</a></li>
+            <li><a href="#tours">Custom Tours</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Destinations</h5>
+          <ul>
+            <li><a href="#map">Lalibela</a></li>
+            <li><a href="#map">Axum</a></li>
+            <li><a href="#map">Danakil Depression</a></li>
+            <li><a href="#map">Simien Mountains</a></li>
+            <li><a href="#map">Omo Valley</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Plan Your Trip</h5>
+          <ul>
+            <li><a href="#recommender">AI Recommender</a></li>
+            <li><a href="#seasonal">Best Time to Visit</a></li>
+            <li><a href="#checklist">Packing Checklist</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#contact">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Careers</a></li>
+            <li><a href="#contact">Privacy Policy</a></li>
+            <li><a href="#contact">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 Ethiopia Explore Tours. All rights reserved. | Made with ❤️ in Addis Ababa, Ethiopia</p>
+      <p lang="am" class="footer-am">© 2024 ኢትዮጵያ ኤክስፕሎር ቱርስ። መብቱ በህግ የተጠበቀ ነው።</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- Scripts -->
+   <script src="customer-support.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

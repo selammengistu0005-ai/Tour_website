@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Tours — Ethiopia Explore Tours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">🦁</span>
+        <div class="logo-text">
+          <span class="logo-main">Ethiopia Explore Tours</span>
+          <span class="logo-sub" lang="am">ኢትዮጵያ ኤክስፕሎር ቱርስ</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html#tours">Tours</a></li>
+        <li><a href="index.html#map">Destinations</a></li>
+        <li><a href="index.html#timeline">Itinerary</a></li>
+        <li><a href="index.html#recommender">AI Recommender</a></li>
+        <li><a href="index.html#seasonal">Seasons</a></li>
+        <li><a href="index.html#checklist">Checklist</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#compare">Compare</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN | አማ</button>
+        <button class="nav-cta" id="bookNow">Book Now</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html#tours">Tours</a></li>
+        <li><a href="index.html#map">Destinations</a></li>
+        <li><a href="index.html#timeline">Itinerary</a></li>
+        <li><a href="index.html#recommender">AI Recommender</a></li>
+        <li><a href="index.html#seasonal">Seasons</a></li>
+        <li><a href="index.html#checklist">Checklist</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#compare">Compare</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <!-- ===== PAGE HERO ===== -->
+  <section class="tour-hero" id="tourHero">
+    <div class="tour-hero-slides">
+      <div class="tour-hero-slide active" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781174507/5d042f46-56a0-47a8-8b1d-caf46a0e1a1b.png')"></div>
+      <div class="tour-hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781174664/30a6c3d6-1e8c-4c14-b4ca-676367f9422b.png')"></div>
+      <div class="tour-hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781176009/6c6d8f3a-66d6-4af3-9b1d-1b2c53a649ad.png')"></div>
+      <div class="tour-hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781176488/176a822e-a27c-4bfa-86d0-9a76fbf19ac8.png')"></div>
+      <div class="tour-hero-slide" style="background-image: url('https://res.cloudinary.com/dza5rdls6/image/upload/v1781176165/95098717-e8d1-413d-a4dc-691d9c0b7175.png')"></div>
+    </div>
+    <div class="tour-hero-overlay"></div>
+    <div class="tour-hero-content">
+      <a href="index.html" class="tours-page-back">← Back to Home</a>
+      <div class="tour-hero-text">
+        <span class="section-eyebrow">All Destinations</span>
+        <h1 class="tour-hero-title" id="tourHeroTitle">Where the Earth Still Burns</h1>
+        <p class="tour-hero-sub" id="tourHeroSub">Witness nature's raw power in Ethiopia's volcanic heart</p>
+      </div>
+    </div>
+    <div class="tour-hero-dots">
+      <button class="tour-hero-dot active" data-slide="0"></button>
+      <button class="tour-hero-dot" data-slide="1"></button>
+      <button class="tour-hero-dot" data-slide="2"></button>
+      <button class="tour-hero-dot" data-slide="3"></button>
+      <button class="tour-hero-dot" data-slide="4"></button>
+    </div>
+    <div class="tour-hero-scroll">
+      <span>Explore All 50 Tours</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== ALL TOURS SECTION ===== -->
+  <section id="all-tours">
+
+    <!-- Toolbar -->
+    <div class="tours-toolbar">
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" id="tourSearch" placeholder="Search tours by name or keyword..." aria-label="Search tours" />
+      </div>
+      <div class="sort-bar">
+        <label for="tourSort">Sort by:</label>
+        <select id="tourSort">
+          <option value="default">Default</option>
+          <option value="name-asc">Name: A–Z</option>
+          <option value="name-desc">Name: Z–A</option>
+          <option value="duration-asc">Duration: Shortest</option>
+          <option value="duration-desc">Duration: Longest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="tours-filters">
+      <div class="filter-group">
+        <label for="filterActivity">Activity Type</label>
+        <select id="filterActivity">
+          <option value="all">All Activities</option>
+          <option value="cultural">Historical & Cultural</option>
+          <option value="wildlife">Wildlife & Safari</option>
+          <option value="trekking">Trekking & Adventure</option>
+          <option value="nature">Nature & Scenery</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterDuration">Duration</label>
+        <select id="filterDuration">
+          <option value="all">Any Duration</option>
+          <option value="1-3">1–3 Days</option>
+          <option value="4-7">4–7 Days</option>
+          <option value="8-14">8–14 Days</option>
+          <option value="15+">15+ Days</option>
+        </select>
+      </div>
+      <button class="filter-reset" id="filterReset">Reset Filters</button>
+    </div>
+
+    <!-- Results Count -->
+    <p class="tours-count" id="toursCount"><strong>50</strong> tours available</p>
+
+    <!-- Grid -->
+    <div class="tours-grid" id="toursGrid"></div>
+
+    <!-- Empty State -->
+    <div class="tours-empty" id="toursEmpty">
+      <span>😕</span>
+      <p>No tours match your search. Try adjusting your filters.</p>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🦁</span>
+          <div>
+            <span class="footer-logo-main">Ethiopia Explore Tours</span>
+            <span class="footer-logo-sub" lang="am">ኢትዮጵያ ኤክስፕሎር ቱርስ</span>
+          </div>
+        </div>
+        <p class="footer-tagline">Your gateway to the ancient wonders, dramatic landscapes, and vibrant cultures of Ethiopia.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook" class="social-link">📘</a>
+          <a href="#" aria-label="Instagram" class="social-link">📸</a>
+          <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+          <a href="#" aria-label="YouTube" class="social-link">▶️</a>
+          <a href="#" aria-label="TripAdvisor" class="social-link">🦉</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Tours</h5>
+          <ul>
+            <li><a href="tour.html">All Packages</a></li>
+            <li><a href="index.html#tours">Historical & Cultural</a></li>
+            <li><a href="index.html#tours">Wildlife & Safari</a></li>
+            <li><a href="index.html#tours">Trekking & Adventure</a></li>
+            <li><a href="index.html#contact">Custom Tours</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Destinations</h5>
+          <ul>
+            <li><a href="index.html#map">Lalibela</a></li>
+            <li><a href="index.html#map">Axum</a></li>
+            <li><a href="index.html#map">Danakil Depression</a></li>
+            <li><a href="index.html#map">Simien Mountains</a></li>
+            <li><a href="index.html#map">Omo Valley</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Plan Your Trip</h5>
+          <ul>
+            <li><a href="index.html#recommender">AI Recommender</a></li>
+            <li><a href="index.html#seasonal">Best Time to Visit</a></li>
+            <li><a href="index.html#checklist">Packing Checklist</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="index.html#contact">About Us</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#contact">Careers</a></li>
+            <li><a href="index.html#contact">Privacy Policy</a></li>
+            <li><a href="index.html#contact">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Ethiopia Explore Tours. All rights reserved. | Made with ❤️ in Addis Ababa, Ethiopia</p>
+      <p lang="am" class="footer-am">© 2024 ኢትዮጵያ ኤክስፕሎር ቱርስ። መብቱ በህግ የተጠበቀ ነው።</p>
+    </div>
+  </footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+   <script src="customer-support.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
