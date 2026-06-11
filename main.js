@@ -718,160 +718,122 @@ function initCalculator() {
    6. DESTINATION NETWORK EXPLORER
    ================================================================ */
 
-/* Connection map — which nodes link to which */
-const NETWORK_CONNECTIONS = [
-  ['addis', 'lalibela'],
-  ['addis', 'axum'],
-  ['addis', 'gondar'],
-  ['addis', 'simien'],
-  ['addis', 'harar'],
-  ['addis', 'bale'],
-  ['addis', 'omo']
-];
-
 function initMap() {
-  const canvas    = document.getElementById('networkCanvas');
-  const container = canvas ? canvas.parentElement : null;
-  const nodes     = document.querySelectorAll('.dest-node');
-  const infoDefault = document.getElementById('networkInfoDefault');
-  const infoDetail  = document.getElementById('networkInfoDetail');
-  const closeBtn    = document.getElementById('networkInfoClose');
+  const pins     = document.querySelectorAll('.map-pin');
+  const popup    = document.getElementById('mapPopup');
+  const backdrop = document.getElementById('mapPopupBackdrop');
+  const closeBtn = document.getElementById('mapPopupClose');
 
-  if (!canvas || !container) return;
+  if (!pins.length || !popup) return;
 
-  /* ── Size canvas to match container ── */
-  function resizeCanvas() {
-    canvas.width  = container.offsetWidth;
-    canvas.height = container.offsetHeight;
-    drawNetworkLines(activeNetworkNode);
+  /* ── Destination data keyed by data-dest ── */
+  const MAP_DATA = {
+    addis:         { name: 'Addis Ababa',            region: 'Central Ethiopia',   image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The vibrant capital of Ethiopia — a city of contrasts where ancient tradition meets modern Africa. Home to the African Union, world-class museums, and the famous Mercato market.', highlights: ['National Museum', 'Mercato Market', 'African Union HQ', 'Entoto Hills'], bestTime: 'Oct–May', altitude: '2,355m', getting: 'Direct flights worldwide' },
+    simien:        { name: 'Simien Mountains',        region: 'Amhara Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094329/39fd07c9-8a54-44b0-b0f9-e082e8af8b8a.png', desc: 'Africa\'s Grand Canyon — a UNESCO World Heritage site with dramatic escarpments, deep gorges, and some of the continent\'s highest peaks. Home to the endemic gelada baboon.', highlights: ['Gelada Baboons', 'Ras Dashen Peak', 'UNESCO Heritage', 'Panoramic Escarpments'], bestTime: 'Oct–Mar', altitude: '4,550m', getting: '~1 hr from Gondar' },
+    bale:          { name: 'Bale Mountains',          region: 'Oromia Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094793/583ecc2c-8f90-41b9-b466-56b2d67757e7.png', desc: 'A highland wilderness sheltering the Ethiopian wolf — Africa\'s rarest canid. Vast Afroalpine moorlands, the Harenna cloud forest, and mountain nyala await.', highlights: ['Ethiopian Wolf', 'Mountain Nyala', 'Harenna Forest', 'Sanetti Plateau'], bestTime: 'Nov–Mar', altitude: '4,377m', getting: '~6 hrs from Addis' },
+    bluenilefalls: { name: 'Blue Nile Falls',         region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600', desc: 'Known locally as Tis Abay — "Smoking Water" — the Blue Nile Falls thunder 45 metres into a misty gorge, creating rainbows and drenching the surrounding forest.', highlights: ['45m Waterfall', 'Blue Nile Source', 'Lush Rainforest', 'Scenic Gorge'], bestTime: 'Sep–Nov', altitude: '1,700m', getting: '~30 min from Bahir Dar' },
+    danakil:       { name: 'Danakil Depression',      region: 'Afar Region',        image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094396/424f20a3-7f73-4b6e-875e-ab67955a2a5f.png', desc: 'One of Earth\'s most extreme environments — below sea level, scorching hot, with active volcanoes, neon sulfur springs, and vast salt flats stretching to the horizon.', highlights: ['Erta Ale Lava Lake', 'Dallol Crater', 'Salt Flats', 'Afar Nomads'], bestTime: 'Nov–Feb', altitude: '−125m', getting: '~3 hrs from Mekelle' },
+    ertaale:       { name: 'Erta Ale Volcano',        region: 'Afar Region',        image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094396/424f20a3-7f73-4b6e-875e-ab67955a2a5f.png', desc: 'One of the world\'s only permanent lava lakes, Erta Ale is a shield volcano deep in the Danakil. Hiking to the crater rim at night to witness churning molten lava is unforgettable.', highlights: ['Permanent Lava Lake', 'Night Hike', 'Danakil Heart', 'Raw Volcanic Power'], bestTime: 'Nov–Feb', altitude: '613m', getting: '~4 hrs 4WD from Semera' },
+    laketana:      { name: 'Lake Tana',               region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=600', desc: 'Ethiopia\'s largest lake and the source of the Blue Nile. Its island monasteries — some dating to the 14th century — house remarkable ancient murals, manuscripts, and royal mummies.', highlights: ['Island Monasteries', 'Blue Nile Source', 'Ancient Murals', 'Hippos & Birds'], bestTime: 'Oct–Mar', altitude: '1,788m', getting: '~1 hr flight from Addis' },
+    sofomar:       { name: 'Sof Omar Caves',          region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Africa\'s longest cave system — over 15km of dramatic chambers carved by the Web River. Sacred to local Muslims, the caverns feature towering pillars and crystal-clear underground pools.', highlights: ['Africa\'s Longest Cave', 'Underground River', 'Sacred Site', 'Dramatic Chambers'], bestTime: 'Oct–Apr', altitude: '1,200m', getting: '~5 hrs from Addis' },
+    wenchi:        { name: 'Wenchi Crater Lake',      region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A stunning caldera lake surrounded by forested rim trails, hot springs, and a small island monastery. One of Ethiopia\'s most scenic and peaceful natural retreats.', highlights: ['Crater Lake', 'Island Monastery', 'Hot Springs', 'Horse Trekking'], bestTime: 'Oct–Feb', altitude: '3,386m', getting: '~2.5 hrs from Addis' },
+    abijattashalla: { name: 'Abijatta-Shalla Lakes', region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Twin Rift Valley lakes in a national park teeming with flamingos, pelicans, and over 300 bird species. Lake Shala\'s hot springs steam dramatically from the shore.', highlights: ['Flamingo Flocks', '300+ Bird Species', 'Hot Springs', 'Rift Valley'], bestTime: 'Nov–Mar', altitude: '1,540m', getting: '~2 hrs from Addis' },
+    nechsar:       { name: 'Nech Sar National Park', region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Bridging Lakes Abaya and Chamo, Nech Sar ("White Grass") shelters crocodiles, hippos, zebra, and Grant\'s gazelle on the grassy plains between the waters.', highlights: ['Crocodiles & Hippos', 'Zebra Plains', 'Twin Lakes', 'Nechisar Nightjar'], bestTime: 'Oct–Mar', altitude: '1,108m', getting: '~6 hrs from Addis' },
+    awash:         { name: 'Awash National Park',    region: 'Afar Region',        image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Ethiopia\'s most accessible wildlife park, straddling the Awash River. Oryx, gazelle, and baboon roam the acacia savanna while the river gorge and Awash Falls dazzle visitors.', highlights: ['Awash Falls', 'Oryx & Gazelle', 'Hot Springs', 'Afar Culture'], bestTime: 'Nov–Mar', altitude: '1,000m', getting: '~2 hrs from Addis' },
+    omo:           { name: 'Omo Valley',             region: 'SNNPR',              image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094450/e7eb5639-1d6f-4361-b8b0-a60714783f73.png', desc: 'One of Africa\'s last great cultural frontiers — home to over 20 indigenous tribes including the Mursi, Hamer, Karo, and Dassanech, each with extraordinary traditions.', highlights: ['Mursi Lip Plates', 'Hamer Bull Jumping', 'Tribal Markets', 'Omo River'], bestTime: 'Oct–Feb', altitude: '500m', getting: '~1 hr flight from Addis' },
+    mago:          { name: 'Mago National Park',     region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Remote and wild, Mago protects buffalo, elephant, giraffe, and lion in one of Ethiopia\'s least-visited wilderness areas, bordering the Omo Valley tribal lands.', highlights: ['Buffalo & Elephant', 'Mursi Village Visits', 'Wild Frontier', 'Omo River'], bestTime: 'Nov–Mar', altitude: '600m', getting: '~1.5 hrs from Jinka' },
+    chebera:       { name: 'Chebera Churchura NP',   region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'One of Ethiopia\'s newest and least-visited parks, with some of the country\'s highest elephant and hippo densities in lush montane forest.', highlights: ['Forest Elephants', 'Hippo Pools', 'Montane Forest', 'Off the Beaten Path'], bestTime: 'Nov–Feb', altitude: '1,500m', getting: '~7 hrs from Addis' },
+    gambella:      { name: 'Gambella National Park', region: 'Gambella Region',    image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A remote tropical lowland park hosting one of Africa\'s last great wildlife migrations — over a million white-eared kob and tiang antelope cross the plains each year.', highlights: ['Great Migration', 'White-Eared Kob', 'Nile Lechwe', 'Tropical Wilderness'], bestTime: 'Dec–Feb', altitude: '400m', getting: '~1.5 hr flight from Addis' },
+    yangudi:       { name: 'Yangudi Rassa NP',       region: 'Afar Region',        image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A remote Afar desert reserve protecting the African wild ass — one of the world\'s most endangered mammals — alongside Grevy\'s zebra and Beisa oryx.', highlights: ['African Wild Ass', 'Grevy\'s Zebra', 'Afar Desert', 'Rare & Remote'], bestTime: 'Nov–Feb', altitude: '400m', getting: '~5 hrs from Addis' },
+    kafta:         { name: 'Kafta Sheraro NP',       region: 'Tigray Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Ethiopia\'s largest national park, protecting the northernmost elephant population in Africa and vast dry savanna stretching to the Eritrean border.', highlights: ['Northern Elephants', 'Vast Savanna', 'Tigray Landscape', 'Rare & Wild'], bestTime: 'Nov–Feb', altitude: '600m', getting: '~1 hr from Shire' },
+    alatish:       { name: 'Alatish National Park',  region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A little-known park on the Sudan border famous for its spectacular seasonal elephant migration — one of Africa\'s hidden wildlife spectacles.', highlights: ['Elephant Migration', 'Sudan Border', 'Remote Wilderness', 'Hidden Gem'], bestTime: 'Dec–Mar', altitude: '700m', getting: '~6 hrs from Gondar' },
+    gheralta:      { name: 'Gheralta Mountains',     region: 'Tigray Region',      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600', desc: 'Dramatic sandstone massifs riddled with Tigrinya rock-hewn churches perched on near-vertical cliff faces, requiring rope-assisted climbs to reach some of the most atmospheric churches in Africa.', highlights: ['Cliff Churches', 'Rock Climbing', 'Ancient Murals', 'Tigray Heritage'], bestTime: 'Oct–Mar', altitude: '2,400m', getting: '~2 hrs from Mekelle' },
+    bluenilegorge: { name: 'Blue Nile Gorge',        region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Ethiopia\'s Grand Canyon — a spectacular 1,500m deep gorge carved by the Blue Nile over millennia, offering breathtaking views and dramatic driving on the road between Addis and Bahir Dar.', highlights: ['1,500m Deep Gorge', 'Blue Nile River', 'Dramatic Viewpoints', 'Gelada Baboons'], bestTime: 'Oct–Apr', altitude: '900m', getting: '~3 hrs from Addis' },
+    riftvalley:    { name: 'Rift Valley Lakes',      region: 'Oromia / SNNPR',    image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A chain of seven stunning soda and freshwater lakes in the Ethiopian Rift Valley — each with its own personality, from flamingo-pink Abiata to the resort shores of Langano.', highlights: ['Flamingo Colonies', '7 Linked Lakes', 'Birdwatcher\'s Paradise', 'Rift Scenery'], bestTime: 'Oct–Mar', altitude: '1,540m', getting: '~2 hrs from Addis' },
+    lakelangano:   { name: 'Lake Langano',           region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The only bilharzia-free lake in the Rift Valley — a favourite weekend escape from Addis with russet-brown waters, hippos, and excellent bird watching on its shores.', highlights: ['Safe Swimming', 'Hippos', 'Weaver Birds', 'Weekend Retreat'], bestTime: 'Year-round', altitude: '1,585m', getting: '~2 hrs from Addis' },
+    lakeziway:     { name: 'Lake Ziway',             region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A freshwater Rift Valley lake renowned for its pelicans, hippos, and the traditional reed boats of the Zay people — the island monasteries add a spiritual dimension to a beautiful setting.', highlights: ['Pelicans & Hippos', 'Island Monasteries', 'Zay People', 'Freshwater Lake'], bestTime: 'Oct–Mar', altitude: '1,636m', getting: '~2 hrs from Addis' },
+    lakeabaya:     { name: 'Lake Abaya',             region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Ethiopia\'s largest Rift Valley lake, tinted blood-red by mineral-rich sediment. Its shores are home to crocodiles, hippos, and the Arba Minch region\'s rich birdlife.', highlights: ['Red-Tinted Waters', 'Crocodiles', 'Hippo Pods', 'Arba Minch Views'], bestTime: 'Oct–Mar', altitude: '1,285m', getting: '~6 hrs from Addis' },
+    lakechamo:     { name: 'Lake Chamo',             region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Famous for the "Crocodile Market" — a sandbar teeming with hundreds of enormous Nile crocodiles and basking hippos — Lake Chamo is one of Africa\'s great wildlife spectacles.', highlights: ['Crocodile Market', 'Hippos', 'Boat Safaris', 'Nile Perch'], bestTime: 'Oct–Mar', altitude: '1,235m', getting: '~6 hrs from Addis' },
+    hawassa:       { name: 'Lake Hawassa',           region: 'Sidama Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A lively, beautiful lake at the heart of Hawassa city — famous for the rowdy fish market where marabou storks and pelicans steal scraps, and for its lakeside promenade walks.', highlights: ['Fish Market', 'Marabou Storks', 'Lakeside Walks', 'Hawassa City'], bestTime: 'Year-round', altitude: '1,708m', getting: '~3 hrs from Addis' },
+    lakeshala:     { name: 'Lake Shala',             region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Africa\'s deepest Rift Valley lake, framed by steep caldera walls. Its famous hot springs bubble from the shore at over 90°C, creating a dramatic steaming landscape.', highlights: ['90°C Hot Springs', 'Deepest Rift Lake', 'Flamingos', 'Caldera Walls'], bestTime: 'Oct–Mar', altitude: '1,558m', getting: '~2.5 hrs from Addis' },
+    lakeabijatta:  { name: 'Lake Abijatta',          region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A shallow, alkaline soda lake that turns pink with millions of lesser flamingos at peak season — one of Ethiopia\'s greatest bird spectacles inside the Abijatta-Shalla NP.', highlights: ['Million Flamingos', 'Soda Lake', 'Endemic Birds', 'Pink Horizons'], bestTime: 'Nov–Feb', altitude: '1,540m', getting: '~2 hrs from Addis' },
+    chilalo:       { name: 'Mount Chilalo',          region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The third highest peak in Ethiopia, rising from the Arsi highlands. Its Afroalpine moorlands shelter the endemic Arsi mountain nyala and stunning highland flora.', highlights: ['3rd Highest Peak', 'Arsi Nyala', 'Alpine Moorland', 'Endemic Plants'], bestTime: 'Oct–Mar', altitude: '4,036m', getting: '~4 hrs from Addis' },
+    mountbatu:     { name: 'Mount Batu',             region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A remote and rarely visited peak in the Arsi Mountains, offering pristine high-altitude trekking through heather moorland and giant lobelia forests with spectacular views.', highlights: ['Remote Trekking', 'Giant Lobelias', 'Heather Moorland', 'Solitude'], bestTime: 'Oct–Mar', altitude: '4,204m', getting: '~5 hrs from Addis' },
+    tulludimtu:    { name: 'Mt. Tullu Dimtu',        region: 'Oromia Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094793/583ecc2c-8f90-41b9-b466-56b2d67757e7.png', desc: 'The second highest peak in Ethiopia and the crown of the Bale Mountains, its summit offers panoramic views across the Sanetti Plateau — the world\'s largest Afroalpine habitat.', highlights: ['2nd Highest Peak', 'Sanetti Plateau', 'Ethiopian Wolf', 'Panoramic Views'], bestTime: 'Oct–Mar', altitude: '4,377m', getting: '~6 hrs from Addis' },
+    guassa:        { name: 'Guassa Plateau',         region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A high-altitude community conservation area and one of the best places to see the Ethiopian wolf outside Bale. Vast heather moorlands and starry skies make for magical camping.', highlights: ['Ethiopian Wolf', 'Community Conservation', 'Heather Moorland', 'Star Gazing'], bestTime: 'Oct–Mar', altitude: '3,600m', getting: '~4 hrs from Addis' },
+    borena:        { name: 'Borena Plains',          region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The ancient pastoral homeland of the Borana people — a semi-arid savanna of acacia scrub, singing wells, and cattle culture stretching to the Kenyan border.', highlights: ['Borana Culture', 'Singing Wells', 'Acacia Savanna', 'Kenya Borderlands'], bestTime: 'Nov–Feb', altitude: '1,000m', getting: '~7 hrs from Addis' },
+    babille:       { name: 'Babille Elephant Sanctuary', region: 'Oromia Region', image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Home to one of Africa\'s most genetically distinct elephant populations, the Babille sanctuary protects a small herd in striking desert-edge landscape near Harar.', highlights: ['Unique Elephants', 'Desert Landscape', 'Near Harar', 'Rare Subspecies'], bestTime: 'Nov–Feb', altitude: '1,400m', getting: '~1 hr from Harar' },
+    bilen:         { name: 'Bilen Hot Springs',      region: 'Afar Region',        image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Natural geothermal hot springs in the Awash Valley — a relaxing stop on the road to the Danakil Depression, used by locals for bathing and healing for centuries.', highlights: ['Hot Springs', 'Geothermal Activity', 'Awash Valley', 'Local Tradition'], bestTime: 'Nov–Mar', altitude: '800m', getting: '~3 hrs from Addis' },
+    fentale:       { name: 'Mt. Fentale Crater',     region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A dormant shield volcano on the edge of the Rift Valley with a massive 3km-wide summit crater. The hike rewards with sweeping views over Lake Beseka and the Awash plains.', highlights: ['3km Summit Crater', 'Rift Valley Views', 'Lake Beseka', 'Volcano Hike'], bestTime: 'Oct–Mar', altitude: '1,625m', getting: '~2.5 hrs from Addis' },
+    koka:          { name: 'Koka Reservoir',         region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A large artificial lake on the Awash River famed for excellent sport fishing and spectacular birdwatching, with pelicans, storks, and African fish eagles in abundance.', highlights: ['Sport Fishing', 'African Fish Eagle', 'Pelicans & Storks', 'Easy Day Trip'], bestTime: 'Year-round', altitude: '1,590m', getting: '~1.5 hrs from Addis' },
+    lakehayq:      { name: 'Lake Hayq',              region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A serene highland lake surrounded by juniper forest and a hilltop monastery — one of Ethiopia\'s hidden gems, perfectly placed on the road between Addis and Lalibela.', highlights: ['Hilltop Monastery', 'Juniper Forest', 'Freshwater Lake', 'Quiet Beauty'], bestTime: 'Oct–Mar', altitude: '2,030m', getting: '~6 hrs from Addis' },
+    lakeardibo:    { name: 'Lake Ardibo',             region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A remote and little-visited highland lake in the Wollo region, offering peaceful scenery, good fishing, and a taste of rural Ethiopian highland life far from the tourist trail.', highlights: ['Remote & Peaceful', 'Highland Scenery', 'Wollo Culture', 'Fishing'], bestTime: 'Oct–Mar', altitude: '2,200m', getting: '~7 hrs from Addis' },
+    zuqualla:      { name: 'Mt. Zuqualla',           region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'An extinct volcano just south of Addis — perfect for a day hike to the crater rim, where a sacred lake and ancient monastery nestle in the cool forested caldera.', highlights: ['Crater Lake', 'Ancient Monastery', 'Colobus Monkeys', 'Easy Addis Day Trip'], bestTime: 'Year-round', altitude: '2,989m', getting: '~1.5 hrs from Addis' },
+    debrelibanos:  { name: 'Debre Libanos',          region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'One of Ethiopia\'s most sacred monasteries, perched above a spectacular gorge where gelada baboons roam the cliff edges and lammergeyer vultures soar overhead.', highlights: ['Sacred Monastery', 'Jemma Gorge', 'Gelada Baboons', 'Lammergeyers'], bestTime: 'Oct–Apr', altitude: '2,600m', getting: '~2 hrs from Addis' },
+    jemmagorge:    { name: 'Jemma River Gorge',      region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'One of Ethiopia\'s most dramatic and least-explored gorge systems — a raw trekking frontier of towering cliffs, roaring rapids, and enormous gelada baboon troops.', highlights: ['Untouched Wilderness', 'Gelada Troops', 'Towering Cliffs', 'Remote Trekking'], bestTime: 'Oct–Mar', altitude: '1,200m', getting: '~3 hrs from Addis' },
+    kundi:         { name: 'Kundi Mountain',         region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A remote highland peak in southwest Ethiopia offering village homestay trekking, remarkable endemic birdlife, and a true off-the-beaten-path highland experience.', highlights: ['Village Homestays', 'Endemic Birds', 'Remote Highlands', 'Authentic Culture'], bestTime: 'Oct–Mar', altitude: '2,800m', getting: '~8 hrs from Addis' },
+    gibegorge:     { name: 'Gibe Gorge',             region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A spectacular river canyon in southwest Ethiopia with tropical dry forest, natural hot springs, and outstanding birding — particularly for raptors and hornbills.', highlights: ['Tropical Forest', 'Hot Springs', 'Raptor Watching', 'Gibe River'], bestTime: 'Oct–Mar', altitude: '1,000m', getting: '~4 hrs from Addis' },
+    choke:         { name: 'Choke Mountains',        region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The high-altitude source of the Blue Nile — a vast rolling highland massif above Lake Tana, with endemic wildlife, Afroalpine moorlands, and trekking routes rarely walked by outsiders.', highlights: ['Blue Nile Headwaters', 'Afroalpine Moorland', 'Endemic Wildlife', 'Remote Trekking'], bestTime: 'Oct–Mar', altitude: '4,000m', getting: '~3 hrs from Bahir Dar' },
+    menagesha:     { name: 'Menagesha Forest',       region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'Ethiopia\'s oldest protected forest — a cool highland escape just outside Addis, with giant podocarpus trees, black-and-white colobus monkeys, and excellent birding trails.', highlights: ['Ancient Forest', 'Colobus Monkeys', 'Podocarpus Trees', 'Easy Addis Escape'], bestTime: 'Year-round', altitude: '2,800m', getting: '~1 hr from Addis' },
+    harenna:       { name: 'Harenna Forest',         region: 'Oromia Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094793/583ecc2c-8f90-41b9-b466-56b2d67757e7.png', desc: 'A mysterious Afromontane cloud forest on the southern slopes of the Bale Mountains — home to wild coffee trees, African lions, giant forest hogs, and colobus monkeys under a cathedral canopy.', highlights: ['Wild Coffee', 'African Lions', 'Cloud Forest', 'Colobus Monkeys'], bestTime: 'Oct–Mar', altitude: '1,500m', getting: '~7 hrs from Addis' },
+    kafa:          { name: 'Kafa Biosphere Reserve', region: 'SNNPR',              image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'The birthplace of coffee — the wild montane forests of Kafa are where Coffea arabica was first discovered. A UNESCO Biosphere Reserve of extraordinary biodiversity and cultural richness.', highlights: ['Birthplace of Coffee', 'UNESCO Biosphere', 'Kafa Culture', 'Rainforest'], bestTime: 'Oct–Mar', altitude: '1,900m', getting: '~8 hrs from Addis' },
+    yayu:          { name: 'Yayu Coffee Forest',     region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'One of the last great wild coffee forests on Earth — a UNESCO Biosphere Reserve where wild Coffea arabica grows beneath a vast intact rainforest canopy in western Ethiopia.', highlights: ['Wild Arabica Coffee', 'UNESCO Biosphere', 'Intact Rainforest', 'Western Frontier'], bestTime: 'Oct–Mar', altitude: '1,600m', getting: '~9 hrs from Addis' },
+    bishoftu:      { name: 'Bishoftu Crater Lakes',  region: 'Oromia Region',      image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600', desc: 'A cluster of stunning volcanic crater lakes just an hour from Addis — popular for weekend escapes, water sports, birdwatching, and the spectacular Irreechaa festival held at Lake Hora each October.', highlights: ['Crater Lakes', 'Irreechaa Festival', 'Water Sports', 'Easy Addis Day Trip'], bestTime: 'Year-round', altitude: '1,920m', getting: '~1 hr from Addis' },
+    harar:         { name: 'Harar',                  region: 'Harari Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094835/42f8d671-65b1-49f7-8564-e30aa7924b6c.png', desc: 'Africa\'s 4th holiest Islamic city, encircled by a 16th-century wall. Its 82 mosques, colorful painted houses, and the legendary nightly hyena feeding ritual make it utterly unique.', highlights: ['Walled Old City', 'Hyena Feeding', 'Rimbaud\'s House', '82 Mosques'], bestTime: 'Oct–Mar', altitude: '1,885m', getting: '~1.5 hr flight from Addis' },
+    lalibela:      { name: 'Lalibela',               region: 'Amhara Region',      image: 'https://res.cloudinary.com/dza5rdls6/image/upload/v1781094302/730d2bc9-f739-4bac-8cdd-76c76e095f76.png', desc: 'Known as the "New Jerusalem," Lalibela\'s 11 monolithic rock-hewn churches were carved from solid red rock in the 12th century and remain active places of worship today.', highlights: ['Rock-Hewn Churches', 'UNESCO Heritage', 'Timkat Festival', 'Living Pilgrimage'], bestTime: 'Oct–Mar', altitude: '2,630m', getting: '~1 hr flight from Addis' },
+    axum:          { name: 'Axum',                   region: 'Tigray Region',      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600', desc: 'Capital of the ancient Aksumite Empire — towering stelae, underground royal tombs, and the Church of St. Mary of Zion, believed by Ethiopians to house the original Ark of the Covenant.', highlights: ['Ancient Obelisks', 'Ark of the Covenant', 'Royal Tombs', 'Queen of Sheba'], bestTime: 'Oct–Mar', altitude: '2,131m', getting: '~2 hr flight from Addis' },
+    gondar:        { name: 'Gondar',                 region: 'Amhara Region',      image: 'https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=600', desc: 'The "Camelot of Africa" — a walled Royal Enclosure containing six medieval castles built by successive emperors in the 17th century, earning Gondar its nickname as Africa\'s medieval city.', highlights: ['Royal Enclosure', '6 Castles', 'Debre Berhan Church', 'Timkat Festival'], bestTime: 'Oct–Mar', altitude: '2,133m', getting: '~1 hr flight from Addis' }
+  };
+
+  /* ── Open popup ── */
+  function openPopup(destId) {
+    const dest = MAP_DATA[destId];
+    if (!dest) return;
+
+    /* Mark active pin */
+    pins.forEach(p => p.classList.remove('active'));
+    const activePin = document.querySelector(`.map-pin[data-dest="${destId}"]`);
+    if (activePin) activePin.classList.add('active');
+
+    /* Populate */
+    document.getElementById('mapPopupImg').src         = dest.image;
+    document.getElementById('mapPopupImg').alt         = dest.name;
+    document.getElementById('mapPopupName').textContent    = dest.name;
+    document.getElementById('mapPopupDesc').textContent    = dest.desc;
+    document.getElementById('mapPopupRegion').textContent  = dest.region;
+
+    document.getElementById('mapPopupHighlights').innerHTML =
+      dest.highlights.map(h => `<span class="highlight-tag">${h}</span>`).join('');
+
+    document.getElementById('mapPopupMeta').innerHTML = `
+      <span><b>Best Time</b>${dest.bestTime}</span>
+      <span><b>Altitude</b>${dest.altitude}</span>
+      <span><b>Getting There</b>${dest.getting}</span>
+    `;
+
+    /* Show */
+    popup.classList.add('visible');
+    backdrop.classList.add('visible');
   }
 
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  /* ── Draw all connection lines ── */
-  function drawNetworkLines(activeId) {
-    const ctx = canvas.getContext('2d');
-    const w   = canvas.width;
-    const h   = canvas.height;
-    ctx.clearRect(0, 0, w, h);
-
-    /* Helper: get center px coords of a node from its % CSS position */
-    function nodeCenter(destId) {
-      const el = document.querySelector(`.dest-node[data-destination="${destId}"]`);
-      if (!el) return null;
-      const left = parseFloat(el.style.left) / 100 * w;
-      const top  = parseFloat(el.style.top)  / 100 * h;
-      return { x: left, y: top };
-    }
-
-    NETWORK_CONNECTIONS.forEach(([a, b]) => {
-      const pA = nodeCenter(a);
-      const pB = nodeCenter(b);
-      if (!pA || !pB) return;
-
-      const isActive = activeId && (a === activeId || b === activeId);
-
-      ctx.beginPath();
-      ctx.moveTo(pA.x, pA.y);
-      ctx.lineTo(pB.x, pB.y);
-
-      if (isActive) {
-        /* Bright glowing line for active connections */
-        ctx.strokeStyle = 'rgba(212, 130, 10, 0.85)';
-        ctx.lineWidth   = 2;
-        ctx.shadowColor = 'rgba(212, 130, 10, 0.7)';
-        ctx.shadowBlur  = 12;
-      } else if (activeId) {
-        /* Dimmed lines when another node is active */
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-        ctx.lineWidth   = 1;
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur  = 0;
-      } else {
-        /* Default idle state — soft glow */
-        ctx.strokeStyle = 'rgba(193, 68, 14, 0.35)';
-        ctx.lineWidth   = 1.2;
-        ctx.shadowColor = 'rgba(193, 68, 14, 0.25)';
-        ctx.shadowBlur  = 6;
-      }
-
-      ctx.stroke();
-      ctx.shadowBlur = 0; /* reset shadow so it doesn't bleed */
-    });
+  /* ── Close popup ── */
+  function closePopup() {
+    popup.classList.remove('visible');
+    backdrop.classList.remove('visible');
+    pins.forEach(p => p.classList.remove('active'));
   }
 
-  /* ── Node click handler ── */
-  nodes.forEach(node => {
-    node.addEventListener('click', () => {
-      const destId = node.dataset.destination;
-      const dest   = DESTINATIONS[destId];
-      if (!dest) return;
-
-      /* Update active node state */
-      activeNetworkNode = destId;
-
-      /* Apply active / dimmed classes */
-      nodes.forEach(n => {
-        n.classList.remove('active', 'dimmed');
-        if (n.dataset.destination === destId) {
-          n.classList.add('active');
-        } else {
-          n.classList.add('dimmed');
-        }
-      });
-
-      /* Redraw lines with active highlight */
-      drawNetworkLines(destId);
-
-      /* ── Populate info panel ── */
-      document.getElementById('networkDestImage').src = dest.image;
-      document.getElementById('networkDestImage').alt = dest.name;
-      document.getElementById('networkDestName').textContent = dest.name;
-      document.getElementById('networkDestDesc').textContent = dest.desc;
-      document.getElementById('networkDestRegion').textContent = dest.region;
-
-      document.getElementById('networkDestStats').innerHTML = `
-        <div class="network-stat-item">
-          <span class="network-stat-label">Best Season</span>
-          <span class="network-stat-value">${dest.bestTime}</span>
-        </div>
-        <div class="network-stat-item">
-          <span class="network-stat-label">Altitude</span>
-          <span class="network-stat-value">${dest.altitude}</span>
-        </div>
-        <div class="network-stat-item">
-          <span class="network-stat-label">Getting There</span>
-          <span class="network-stat-value">${dest.flightFrom}</span>
-        </div>
-        <div class="network-stat-item">
-          <span class="network-stat-label">Tours Available</span>
-          <span class="network-stat-value">${TOURS.filter(t => t.destination === destId).length} packages</span>
-        </div>
-      `;
-
-      document.getElementById('networkDestHighlights').innerHTML =
-        dest.highlights.map(h => `<span class="highlight-tag">${h}</span>`).join('');
-
-      /* Show detail panel with animation */
-      infoDefault.style.display = 'none';
-      infoDetail.style.display  = 'block';
-    });
+  /* ── Event listeners ── */
+  pins.forEach(pin => {
+    pin.addEventListener('click', () => openPopup(pin.dataset.dest));
   });
 
-  /* ── Close button ── */
-  closeBtn.addEventListener('click', () => {
-    activeNetworkNode = null;
+  closeBtn.addEventListener('click', closePopup);
+  backdrop.addEventListener('click', closePopup);
 
-    nodes.forEach(n => n.classList.remove('active', 'dimmed'));
-    drawNetworkLines(null);
-
-    infoDetail.style.display  = 'none';
-    infoDefault.style.display = 'flex';
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup();
   });
-
-  /* ── Initial draw ── */
-  drawNetworkLines(null);
 }
 
 /* ================================================================
@@ -1770,15 +1732,17 @@ if (document.getElementById('toursGrid') && !document.getElementById('tourSearch
       const activity = document.getElementById('filterActivity').value;
       const duration = document.getElementById('filterDuration').value;
       const sort     = document.getElementById('tourSort').value;
+      const destination = document.getElementById('filterDestination').value;
       filtered = TOURS.filter(t => {
-        const matchSearch   = !search || t.title.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
-        const matchActivity = activity === 'all' || t.activity === activity;
-        let   matchDuration = true;
+        const matchSearch      = !search || t.title.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
+        const matchActivity    = activity === 'all' || t.activity === activity;
+        const matchDestination = destination === 'all' || t.title === destination;
+        let   matchDuration    = true;
         if (duration !== 'all') {
           if (duration === '15+') matchDuration = t.duration >= 15;
           else { const [lo, hi] = duration.split('-').map(Number); matchDuration = t.duration >= lo && t.duration <= hi; }
         }
-        return matchSearch && matchActivity && matchDuration;
+        return matchSearch && matchActivity && matchDuration && matchDestination;
       });
       if (sort === 'name-asc')         filtered.sort((a, b) => a.title.localeCompare(b.title));
       else if (sort === 'name-desc')   filtered.sort((a, b) => b.title.localeCompare(a.title));
@@ -1787,7 +1751,41 @@ if (document.getElementById('toursGrid') && !document.getElementById('tourSearch
       renderCards(filtered);
     }
 
-    document.getElementById('tourSearch').addEventListener('input', applyFilters);
+    const searchInput   = document.getElementById('tourSearch');
+    const searchInput   = document.getElementById('tourSearch');
+    const suggestBox    = document.getElementById('searchSuggestions');
+
+    function showSuggestions(query) {
+      if (!query) { suggestBox.classList.remove('open'); suggestBox.innerHTML = ''; return; }
+      const matches = TOURS.filter(t =>
+        t.title.toLowerCase().includes(query) || t.description.toLowerCase().includes(query)
+      ).slice(0, 8);
+      if (!matches.length) { suggestBox.classList.remove('open'); suggestBox.innerHTML = ''; return; }
+      const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      suggestBox.innerHTML = matches.map(t => `
+        <div class="suggestion-item" data-title="${t.title}">
+          🗺️ ${t.title.replace(re, '<mark>$1</mark>')}
+          <span class="suggestion-badge">${t.duration} days · ${t.activity}</span>
+        </div>
+      `).join('');
+      suggestBox.classList.add('open');
+      suggestBox.querySelectorAll('.suggestion-item').forEach(item => {
+        item.addEventListener('mousedown', () => {
+          searchInput.value = item.dataset.title;
+          suggestBox.classList.remove('open');
+          suggestBox.innerHTML = '';
+          applyFilters();
+        });
+      });
+    }
+
+    searchInput.addEventListener('input', () => {
+      applyFilters();
+      showSuggestions(searchInput.value.toLowerCase().trim());
+    });
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => { suggestBox.classList.remove('open'); suggestBox.innerHTML = ''; }, 150);
+    });
     document.getElementById('tourSort').addEventListener('change', applyFilters);
     document.getElementById('filterActivity').addEventListener('change', applyFilters);
     document.getElementById('filterDuration').addEventListener('change', applyFilters);
