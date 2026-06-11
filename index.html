@@ -114,9 +114,12 @@
 
     <!-- Search & Sort Bar -->
     <div class="tours-toolbar">
-      <div class="search-bar">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="tourSearch" placeholder="Search tours by name or keyword..." aria-label="Search tours" />
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="tourSearch" placeholder="Search tours by name or keyword..." aria-label="Search tours" autocomplete="off" />
+        </div>
+        <div class="search-suggestions" id="searchSuggestions"></div>
       </div>
       <div class="sort-bar">
         <label for="tourSort">Sort by:</label>
@@ -133,16 +136,58 @@
       <div class="filter-group">
         <label for="filterDestination">Destination</label>
         <select id="filterDestination">
-          <option value="all">All Destinations</option>
-          <option value="lalibela">Lalibela</option>
-          <option value="axum">Axum</option>
-          <option value="danakil">Danakil Depression</option>
-          <option value="simien">Simien Mountains</option>
-          <option value="omo">Omo Valley</option>
-          <option value="harar">Harar</option>
-          <option value="bale">Bale Mountains</option>
-          <option value="addis">Addis Ababa</option>
-        </select>
+  <option value="all">All Destinations</option>
+  <option value="Simien Mountains">Simien Mountains</option>
+  <option value="Bale Mountains">Bale Mountains</option>
+  <option value="Blue Nile Falls">Blue Nile Falls</option>
+  <option value="Danakil Depression">Danakil Depression</option>
+  <option value="Erta Ale Volcano">Erta Ale Volcano</option>
+  <option value="Lake Tana">Lake Tana</option>
+  <option value="Sof Omar Caves">Sof Omar Caves</option>
+  <option value="Wenchi Crater Lake">Wenchi Crater Lake</option>
+  <option value="Abijatta-Shalla Lakes">Abijatta-Shalla Lakes</option>
+  <option value="Nech Sar National Park">Nech Sar National Park</option>
+  <option value="Awash National Park">Awash National Park</option>
+  <option value="Omo National Park">Omo National Park</option>
+  <option value="Mago National Park">Mago National Park</option>
+  <option value="Chebera Churchura National Park">Chebera Churchura National Park</option>
+  <option value="Gambella National Park">Gambella National Park</option>
+  <option value="Yangudi Rassa National Park">Yangudi Rassa National Park</option>
+  <option value="Kafta Sheraro National Park">Kafta Sheraro National Park</option>
+  <option value="Alatish National Park">Alatish National Park</option>
+  <option value="Gheralta Mountains">Gheralta Mountains</option>
+  <option value="Tis Issat Gorge">Tis Issat Gorge</option>
+  <option value="Blue Nile Gorge">Blue Nile Gorge</option>
+  <option value="Rift Valley Lakes">Rift Valley Lakes</option>
+  <option value="Lake Langano">Lake Langano</option>
+  <option value="Lake Ziway">Lake Ziway</option>
+  <option value="Lake Abaya">Lake Abaya</option>
+  <option value="Lake Chamo">Lake Chamo</option>
+  <option value="Lake Hawassa">Lake Hawassa</option>
+  <option value="Lake Shala">Lake Shala</option>
+  <option value="Lake Abijatta">Lake Abijatta</option>
+  <option value="Mount Chilalo">Mount Chilalo</option>
+  <option value="Mount Batu">Mount Batu</option>
+  <option value="Mount Tullu Dimtu">Mount Tullu Dimtu</option>
+  <option value="Guassa Plateau">Guassa Plateau</option>
+  <option value="Borena Plains">Borena Plains</option>
+  <option value="Babille Elephant Sanctuary">Babille Elephant Sanctuary</option>
+  <option value="Bilen Hot Springs">Bilen Hot Springs</option>
+  <option value="Fentale Crater">Fentale Crater</option>
+  <option value="Koka Reservoir">Koka Reservoir</option>
+  <option value="Lake Hayq">Lake Hayq</option>
+  <option value="Lake Ardibo">Lake Ardibo</option>
+  <option value="Mount Zuqualla">Mount Zuqualla</option>
+  <option value="Debre Libanos Gorge">Debre Libanos Gorge</option>
+  <option value="Jemma River Gorge">Jemma River Gorge</option>
+  <option value="Kundi Mountain">Kundi Mountain</option>
+  <option value="Gibe Gorge">Gibe Gorge</option>
+  <option value="Choke Mountains">Choke Mountains</option>
+  <option value="Menagesha Suba Forest">Menagesha Suba Forest</option>
+  <option value="Harenna Forest">Harenna Forest</option>
+  <option value="Kafa Biosphere Reserve">Kafa Biosphere Reserve</option>
+  <option value="Yayu Coffee Forest Biosphere">Yayu Coffee Forest Biosphere</option>
+</select>
       </div>
       <div class="filter-group">
         <label for="filterDuration">Duration</label>
@@ -176,7 +221,7 @@
     </div>
   </section>
 
-<!-- ===== SECTION 3: DESTINATION NETWORK EXPLORER ===== -->
+<!-- ===== SECTION 3: DESTINATION MAP EXPLORER ===== -->
 <section id="map">
   <div class="section-header">
     <span class="section-eyebrow">Explore the Country</span>
@@ -184,107 +229,337 @@
     <p class="section-subtitle">Click any destination to discover tours, highlights, and travel info.</p>
   </div>
 
-  <div class="network-container">
-    <!-- Canvas for connection lines -->
-    <canvas id="networkCanvas"></canvas>
+  <div class="map-frame" id="mapFrame">
 
-    <!-- Ethiopia silhouette background -->
-    <div class="network-bg-silhouette"></div>
-
-    <!-- Destination Nodes -->
-    <div class="network-nodes" id="networkNodes">
-
-      <div class="dest-node" data-destination="addis" style="left:50%;top:50%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Addis Ababa" />
-        </div>
-        <span class="node-label">Addis Ababa</span>
+    <!-- Central dot — Addis Ababa -->
+    <div class="map-pin pin-central" data-dest="addis">
+      <div class="pin-icon pin-icon-central">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
+          <circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/>
+        </svg>
       </div>
-
-      <div class="dest-node" data-destination="lalibela" style="left:50%;top:8%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Lalibela" />
-        </div>
-        <span class="node-label">Lalibela</span>
-      </div>
-
-      <div class="dest-node" data-destination="axum" style="left:73%;top:17%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=120" alt="Axum" />
-        </div>
-        <span class="node-label">Axum</span>
-      </div>
-
-      <div class="dest-node" data-destination="gondar" style="left:82%;top:50%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Gondar" />
-        </div>
-        <span class="node-label">Gondar</span>
-      </div>
-
-      <div class="dest-node" data-destination="simien" style="left:73%;top:83%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=120" alt="Simien Mountains" />
-        </div>
-        <span class="node-label">Simien Mts</span>
-      </div>
-
-      <div class="dest-node" data-destination="harar" style="left:50%;top:92%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Harar" />
-        </div>
-        <span class="node-label">Harar</span>
-      </div>
-
-      <div class="dest-node" data-destination="bale" style="left:27%;top:83%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1580746738099-b2c6e7d7c5a5?w=120" alt="Bale Mountains" />
-        </div>
-        <span class="node-label">Bale Mts</span>
-      </div>
-
-      <div class="dest-node" data-destination="omo" style="left:27%;top:83%;">
-        <div class="node-ring"></div>
-        <div class="node-inner">
-          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=120" alt="Omo Valley" />
-        </div>
-        <span class="node-label">Omo Valley</span>
-      </div>
-
+      <span class="pin-label">Addis Ababa</span>
     </div>
 
-    <!-- Floating Info Panel -->
-    <div class="network-info-panel" id="networkInfoPanel">
-      <div class="network-info-default" id="networkInfoDefault">
-        <div class="network-info-icon">✦</div>
-        <h3>Select a Destination</h3>
-        <p>Click any node to explore destinations, tours, and travel information.</p>
+    <!-- 1. Simien Mountains — North -->
+    <div class="map-pin" data-dest="simien" style="left:47%;top:10%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Simien Mountains</span>
+    </div>
+
+    <!-- 2. Bale Mountains — Southeast -->
+    <div class="map-pin" data-dest="bale" style="left:63%;top:72%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Bale Mountains</span>
+    </div>
+
+    <!-- 3. Blue Nile Falls — Northwest -->
+    <div class="map-pin" data-dest="bluenilefalls" style="left:30%;top:22%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Blue Nile Falls</span>
+    </div>
+
+    <!-- 4. Danakil Depression — Northeast -->
+    <div class="map-pin" data-dest="danakil" style="left:72%;top:18%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Danakil Depression</span>
+    </div>
+
+    <!-- 5. Erta Ale Volcano — Far Northeast -->
+    <div class="map-pin" data-dest="ertaale" style="left:80%;top:8%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Erta Ale Volcano</span>
+    </div>
+
+    <!-- 6. Lake Tana — Northwest -->
+    <div class="map-pin" data-dest="laketana" style="left:28%;top:15%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Tana</span>
+    </div>
+
+    <!-- 7. Sof Omar Caves — Southeast -->
+    <div class="map-pin" data-dest="sofomar" style="left:68%;top:65%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Sof Omar Caves</span>
+    </div>
+
+    <!-- 8. Wenchi Crater Lake — West -->
+    <div class="map-pin" data-dest="wenchi" style="left:22%;top:48%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Wenchi Crater Lake</span>
+    </div>
+
+    <!-- 9. Abijatta-Shalla Lakes — South -->
+    <div class="map-pin" data-dest="abijattashalla" style="left:46%;top:68%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Abijatta-Shalla Lakes</span>
+    </div>
+
+    <!-- 10. Nech Sar National Park — South -->
+    <div class="map-pin" data-dest="nechsar" style="left:44%;top:78%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Nech Sar NP</span>
+    </div>
+
+    <!-- 11. Awash National Park — East -->
+    <div class="map-pin" data-dest="awash" style="left:70%;top:46%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Awash NP</span>
+    </div>
+
+    <!-- 12. Omo National Park — Southwest -->
+    <div class="map-pin" data-dest="omo" style="left:28%;top:72%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Omo NP</span>
+    </div>
+
+    <!-- 13. Mago National Park — South -->
+    <div class="map-pin" data-dest="mago" style="left:38%;top:82%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mago NP</span>
+    </div>
+
+    <!-- 14. Chebera Churchura — Southwest -->
+    <div class="map-pin" data-dest="chebera" style="left:25%;top:62%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Chebera Churchura</span>
+    </div>
+
+    <!-- 15. Gambella National Park — Far West -->
+    <div class="map-pin" data-dest="gambella" style="left:7%;top:55%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Gambella NP</span>
+    </div>
+
+    <!-- 16. Yangudi Rassa NP — Northeast -->
+    <div class="map-pin" data-dest="yangudi" style="left:74%;top:30%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Yangudi Rassa NP</span>
+    </div>
+
+    <!-- 17. Kafta Sheraro NP — Far North -->
+    <div class="map-pin" data-dest="kafta" style="left:55%;top:4%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Kafta Sheraro NP</span>
+    </div>
+
+    <!-- 18. Alatish NP — Northwest -->
+    <div class="map-pin" data-dest="alatish" style="left:32%;top:10%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Alatish NP</span>
+    </div>
+
+    <!-- 19. Gheralta Mountains — North-Northeast -->
+    <div class="map-pin" data-dest="gheralta" style="left:62%;top:12%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Gheralta Mountains</span>
+    </div>
+
+    <!-- 20. Blue Nile Gorge — Northwest -->
+    <div class="map-pin" data-dest="bluenilegorge" style="left:34%;top:30%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Blue Nile Gorge</span>
+    </div>
+
+    <!-- 21. Rift Valley Lakes Region — South -->
+    <div class="map-pin" data-dest="riftvalley" style="left:50%;top:62%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Rift Valley Lakes</span>
+    </div>
+
+    <!-- 22. Lake Langano — South -->
+    <div class="map-pin" data-dest="lakelangano" style="left:54%;top:65%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Langano</span>
+    </div>
+
+    <!-- 23. Lake Ziway — South -->
+    <div class="map-pin" data-dest="lakeziway" style="left:52%;top:60%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Ziway</span>
+    </div>
+
+    <!-- 24. Lake Abaya — South-Southwest -->
+    <div class="map-pin" data-dest="lakeabaya" style="left:38%;top:78%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Abaya</span>
+    </div>
+
+    <!-- 25. Lake Chamo — South-Southwest -->
+    <div class="map-pin" data-dest="lakechamo" style="left:36%;top:83%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Chamo</span>
+    </div>
+
+    <!-- 26. Lake Hawassa — South -->
+    <div class="map-pin" data-dest="hawassa" style="left:48%;top:72%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Hawassa</span>
+    </div>
+
+    <!-- 27. Lake Shala — South -->
+    <div class="map-pin" data-dest="lakeshala" style="left:44%;top:66%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Shala</span>
+    </div>
+
+    <!-- 28. Lake Abijatta — South -->
+    <div class="map-pin" data-dest="lakeabijatta" style="left:42%;top:63%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Abijatta</span>
+    </div>
+
+    <!-- 29. Mount Chilalo — Southeast -->
+    <div class="map-pin" data-dest="chilalo" style="left:60%;top:58%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mount Chilalo</span>
+    </div>
+
+    <!-- 30. Mount Batu — Southeast -->
+    <div class="map-pin" data-dest="mountbatu" style="left:62%;top:63%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mount Batu</span>
+    </div>
+
+    <!-- 31. Mount Tullu Dimtu — Southeast -->
+    <div class="map-pin" data-dest="tulludimtu" style="left:65%;top:68%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mt. Tullu Dimtu</span>
+    </div>
+
+    <!-- 32. Guassa Plateau — Northeast -->
+    <div class="map-pin" data-dest="guassa" style="left:60%;top:35%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Guassa Plateau</span>
+    </div>
+
+    <!-- 33. Borena Plains — Far South -->
+    <div class="map-pin" data-dest="borena" style="left:42%;top:90%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Borena Plains</span>
+    </div>
+
+    <!-- 34. Babille Elephant Sanctuary — East -->
+    <div class="map-pin" data-dest="babille" style="left:76%;top:52%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Babille Elephant</span>
+    </div>
+
+    <!-- 35. Bilen Hot Springs — Northeast -->
+    <div class="map-pin" data-dest="bilen" style="left:67%;top:38%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Bilen Hot Springs</span>
+    </div>
+
+    <!-- 36. Mount Fentale Crater — East -->
+    <div class="map-pin" data-dest="fentale" style="left:65%;top:48%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mt. Fentale Crater</span>
+    </div>
+
+    <!-- 37. Koka Reservoir — Southeast -->
+    <div class="map-pin" data-dest="koka" style="left:57%;top:55%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Koka Reservoir</span>
+    </div>
+
+    <!-- 38. Lake Hayq — North -->
+    <div class="map-pin" data-dest="lakehayq" style="left:55%;top:22%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Hayq</span>
+    </div>
+
+    <!-- 39. Lake Ardibo — North -->
+    <div class="map-pin" data-dest="lakeardibo" style="left:52%;top:16%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Lake Ardibo</span>
+    </div>
+
+    <!-- 40. Mount Zuqualla — South -->
+    <div class="map-pin" data-dest="zuqualla" style="left:51%;top:57%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Mt. Zuqualla</span>
+    </div>
+
+    <!-- 41. Debre Libanos Gorge — North-Northwest -->
+    <div class="map-pin" data-dest="debrelibanos" style="left:40%;top:32%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Debre Libanos</span>
+    </div>
+
+    <!-- 42. Jemma River Gorge — North -->
+    <div class="map-pin" data-dest="jemmagorge" style="left:48%;top:27%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Jemma River Gorge</span>
+    </div>
+
+    <!-- 43. Kundi Mountain — Southwest -->
+    <div class="map-pin" data-dest="kundi" style="left:28%;top:60%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Kundi Mountain</span>
+    </div>
+
+    <!-- 44. Gibe Gorge — Southwest -->
+    <div class="map-pin" data-dest="gibegorge" style="left:32%;top:58%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Gibe Gorge</span>
+    </div>
+
+    <!-- 45. Choke Mountains — Northwest -->
+    <div class="map-pin" data-dest="choke" style="left:35%;top:22%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Choke Mountains</span>
+    </div>
+
+    <!-- 46. Menagesha Suba Forest — West -->
+    <div class="map-pin" data-dest="menagesha" style="left:38%;top:46%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Menagesha Forest</span>
+    </div>
+
+    <!-- 47. Harenna Forest — Southeast -->
+    <div class="map-pin" data-dest="harenna" style="left:66%;top:72%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Harenna Forest</span>
+    </div>
+
+    <!-- 48. Kafa Biosphere Reserve — Southwest -->
+    <div class="map-pin" data-dest="kafa" style="left:22%;top:66%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Kafa Biosphere</span>
+    </div>
+
+    <!-- 49. Yayu Coffee Forest — Southwest -->
+    <div class="map-pin" data-dest="yayu" style="left:18%;top:58%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Yayu Coffee Forest</span>
+    </div>
+
+    <!-- 50. Bishoftu Crater Lakes — Southeast -->
+    <div class="map-pin" data-dest="bishoftu" style="left:55%;top:52%;">
+      <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg></div>
+      <span class="pin-label">Bishoftu Crater Lakes</span>
+    </div>
+
+    <!-- Popup -->
+    <div class="map-popup" id="mapPopup">
+      <button class="map-popup-close" id="mapPopupClose">✕</button>
+      <div class="map-popup-img-wrap">
+        <img id="mapPopupImg" src="" alt="" />
       </div>
-      <div class="network-info-detail" id="networkInfoDetail" style="display:none;">
-        <button class="network-info-close" id="networkInfoClose">✕</button>
-        <div class="network-dest-image-wrap">
-          <img id="networkDestImage" src="" alt="" />
-          <div class="network-dest-image-overlay"></div>
-          <div class="network-dest-badges">
-            <span class="network-dest-region" id="networkDestRegion"></span>
-          </div>
-        </div>
-        <div class="network-dest-content">
-          <h3 id="networkDestName"></h3>
-          <p id="networkDestDesc"></p>
-          <div class="network-dest-stats" id="networkDestStats"></div>
-          <div class="network-dest-highlights" id="networkDestHighlights"></div>
-          <a href="#tours" class="btn-primary network-dest-cta">View Tours →</a>
-        </div>
+      <div class="map-popup-body">
+        <span class="map-popup-region" id="mapPopupRegion"></span>
+        <h3 class="map-popup-name" id="mapPopupName"></h3>
+        <p class="map-popup-desc" id="mapPopupDesc"></p>
+        <div class="map-popup-highlights" id="mapPopupHighlights"></div>
+        <div class="map-popup-meta" id="mapPopupMeta"></div>
+        <a href="#tours" class="btn-primary map-popup-cta">View Tours →</a>
       </div>
     </div>
+
+    <!-- Overlay backdrop -->
+    <div class="map-popup-backdrop" id="mapPopupBackdrop"></div>
 
   </div>
 </section>
