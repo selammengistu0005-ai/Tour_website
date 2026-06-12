@@ -217,12 +217,12 @@
     </div>
   </section>
 
-<!-- ===== SECTION 3: DESTINATION MAP EXPLORER ===== -->
+<!-- ===== SECTION 3: DESTINATION NETWORK EXPLORER ===== -->
 <section id="map">
   <div class="section-header">
     <span class="section-eyebrow">Explore the Country</span>
     <h2 class="section-title" data-en="Destination Network Explorer" data-am="የመዳረሻ አውታረ መረብ አሳሽ">Destination Network Explorer</h2>
-    <p class="section-subtitle">Click any destination to discover tours, highlights, and travel info.</p>
+    <p class="section-subtitle">Click any destination to discover tours, highlights, and travel info. Addis Ababa anchors your journey.</p>
   </div>
 
   <!-- ── PREMIUM MAP SHELL ── -->
@@ -288,13 +288,20 @@
       </button>
 
       <!-- ── PINS — Central: Addis Ababa (major / golden) ── -->
-      <div class="map-pin pin-major pin-cultural" data-dest="addis" data-cat="cultural">
-        <div class="pin-halo"></div>
-        <div class="pin-glow"></div>
-        <div class="pin-icon">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white" opacity="0.9"/></svg>
+      <!-- ── ADDIS ABABA — Golden Centerpiece Anchor ── -->
+      <div class="map-pin pin-addis" data-dest="addis" data-cat="cultural" style="left:50%;top:48%;">
+        <div class="addis-ambient"></div>
+        <div class="addis-ring addis-ring-3"></div>
+        <div class="addis-ring addis-ring-2"></div>
+        <div class="addis-ring addis-ring-1"></div>
+        <div class="addis-glow"></div>
+        <div class="addis-core">
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/>
+            <circle cx="12" cy="9" r="2.8" fill="#D4820A"/>
+          </svg>
         </div>
-        <span class="pin-label">Addis Ababa</span>
+        <span class="pin-label addis-label">Addis Ababa</span>
       </div>
 
       <!-- ── PINS — Major Cultural (golden) ── -->
@@ -626,26 +633,44 @@
         <span class="pin-label">Mt. Zuqualla</span>
       </div>
 
-      <!-- ── INFORMATION CARD (glassmorphic popup) ── -->
+      <!-- ── PREMIUM GLASSMORPHISM INFO PANEL ── -->
       <div class="map-popup" id="mapPopup" role="dialog" aria-label="Destination info">
         <button class="map-popup-close" id="mapPopupClose" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
+
+        <!-- Destination Preview Image -->
         <div class="map-popup-img-wrap">
           <img id="mapPopupImg" src="" alt="" loading="lazy" />
           <div class="map-popup-img-overlay"></div>
-          <span class="map-popup-category-badge" id="mapPopupCategoryBadge"></span>
+          <span class="map-popup-cat-badge" id="mapPopupCatBadge"></span>
         </div>
+
+        <!-- Panel Body -->
         <div class="map-popup-body">
-          <span class="map-popup-region" id="mapPopupRegion"></span>
-          <h3 class="map-popup-name" id="mapPopupName"></h3>
+          <!-- Region + Name -->
+          <div class="map-popup-header">
+            <span class="map-popup-region" id="mapPopupRegion"></span>
+            <h3 class="map-popup-name" id="mapPopupName"></h3>
+          </div>
+
+          <!-- Short Description -->
           <p class="map-popup-desc" id="mapPopupDesc"></p>
+
+          <!-- Tourist Highlights -->
+          <div class="map-popup-highlights-label">Tourist Highlights</div>
           <div class="map-popup-highlights" id="mapPopupHighlights"></div>
+
+          <!-- Quick Info Tags -->
           <div class="map-popup-meta" id="mapPopupMeta"></div>
-          <a href="#tours" class="btn-primary map-popup-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            View Tours
-          </a>
+
+          <!-- Action Button + Close -->
+          <div class="map-popup-actions">
+            <button class="btn-primary map-popup-cta" id="mapPopupCta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              View Tours
+            </button>
+          </div>
         </div>
       </div>
 
