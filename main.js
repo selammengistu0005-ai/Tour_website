@@ -499,7 +499,7 @@ function initCalculator() {
    ================================================================ */
 
 function initMap() {
-  const pins     = document.querySelectorAll('.map-pin');
+  const pins = document.querySelectorAll('.map-pin, .pin-addis');
   const popup    = document.getElementById('mapPopup');
   const backdrop = document.getElementById('mapPopupBackdrop');
   const closeBtn = document.getElementById('mapPopupClose');
@@ -582,9 +582,12 @@ function initMap() {
     /* Mark active pin — dim all others */
     pins.forEach(p => {
       p.classList.remove('active');
-      p.classList.add('dimmed');
-    });
-    const activePin = document.querySelector(`.map-pin[data-dest="${destId}"]`);
+      if (!p.classList.contains('pin-addis')) {
+        p.classList.add('dimmed');
+        }
+      });
+      
+    const activePin = document.querySelector(`[data-dest="${destId}"]`);
     if (activePin) {
       activePin.classList.add('active');
       activePin.classList.remove('dimmed');
@@ -634,6 +637,7 @@ function initMap() {
     pins.forEach(p => {
       p.classList.remove('active');
       p.classList.remove('dimmed');
+      p.classList.remove('cat-hidden');
     });
   }
 
